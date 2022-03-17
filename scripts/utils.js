@@ -24,9 +24,7 @@ const createFile = (directory, fileName, content) => {
 const generateDirectory = (componentName) => `src/components/${componentName}`
 
 const generateIndexContent = (componentName) =>
-  `export { default as ${toCamelCase(componentName)}, ${toCamelCase(
-    componentName
-  )}Props } from './${componentName}'
+  `export * from './${componentName}'
 `
 
 const generateComponentContent = (componentName) =>
@@ -34,11 +32,10 @@ const generateComponentContent = (componentName) =>
 
 export interface ${componentName}Props {}
 
-const ${componentName}: VFC<${componentName}Props> = ({}) => {
+export const ${componentName}: VFC<${componentName}Props> = ({}) => {
   return <div>${componentName}</div>
 }
 
-export default ${componentName}
 `
 
 module.exports = {

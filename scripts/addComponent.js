@@ -1,4 +1,4 @@
-const { mkdir, appendFile } = require('fs')
+const { mkdir } = require('fs')
 const {
   generateIndexContent,
   generateDirectory,
