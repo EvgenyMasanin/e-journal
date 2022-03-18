@@ -5,7 +5,7 @@ import { LessonItem } from '../lesson-item'
 import { TimetableCardPlaceholder } from '../timetable-card-placeholder'
 
 export interface LessonsListProps {
-  lessons: Lesson[]
+  lessons: Pick<Lesson, 'id' | 'subjectName' | 'lessonNumber'>[]
 }
 
 export const LessonsList: VFC<LessonsListProps> = ({ lessons }) => {
@@ -13,7 +13,7 @@ export const LessonsList: VFC<LessonsListProps> = ({ lessons }) => {
     <TimetableCardPlaceholder />
   ) : (
     <List h="100%" overflow="hidden">
-      {lessons.map(({ id, name, number }) => (
+      {lessons.map(({ id, subjectName: name, lessonNumber: number }) => (
         <LessonItem key={id} lessonName={name} lessonNumber={number} />
       ))}
     </List>

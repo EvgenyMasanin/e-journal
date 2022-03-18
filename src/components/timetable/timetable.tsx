@@ -1,28 +1,24 @@
 import React, { VFC } from 'react'
 import { Heading, SimpleGrid, Stack } from '@chakra-ui/react'
 import { TimetableCard } from 'components/timetable-card'
-import { Lesson, weekDaysType } from 'types/timetable.types'
+import { Lesson, weekDaysRU } from 'types/timetable.types'
 
 export interface TimetableProps {
-  lessons: Lesson[]
-  date: string
+  lessons: Pick<Lesson, 'id' | 'subjectName' | 'lessonNumber'>[]
 }
 
-export const Timetable: VFC<TimetableProps> = ({ lessons, date }) => {
+export const Timetable: VFC<TimetableProps> = ({ lessons }) => {
   return (
-    <Stack direction="column">
-      <Heading mb={5} size="lg">
-        Расписание на: {date}
-      </Heading>
+    <Stack direction="column" h="100%" overflow="auto">
       <SimpleGrid
         columns={[1, null, null, 2, 3]}
         justifyContent="space-around"
         px={10}
-        pb={5}
+        py={5}
         spacingX="80px"
         spacingY={5}
       >
-        {weekDaysType.map((weekDay, i) => (
+        {weekDaysRU.map((weekDay, i) => (
           <TimetableCard key={i} lessons={lessons.slice(0, i)} weekDay={weekDay} />
         ))}
       </SimpleGrid>
