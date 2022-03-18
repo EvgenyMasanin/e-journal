@@ -1,0 +1,24 @@
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
+html[data-theme='dark'] *::-webkit-scrollbar-thumb {
+  background: var(--chakra-colors-teal-200);
+}
+html[data-theme='light'] *::-webkit-scrollbar-thumb {
+  background: var(--chakra-colors-teal-500);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  width: 1px;
+  background-clip: content-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
