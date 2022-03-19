@@ -25,6 +25,12 @@ export type WeekDaysEN = `${WeekDaysMap}`
 export const weekType = ['up', 'down', 'up/down'] as const
 export type WeekType = typeof weekType[number]
 
+export enum WeekTypeMap {
+  'up' = 'верхняя',
+  'down' = 'нижняя',
+  'up/down' = 'верхняя/нижняя',
+}
+
 export enum WeekDays {
   'Понедельник' = 1,
   'Вторник',
@@ -42,6 +48,11 @@ export type CourseNum = 1 | 2 | 3 | 4 | 5
 
 export const semester = ['first', 'second'] as const
 export type Semester = typeof semester[number]
+
+export enum SemesterMap {
+  'first' = 'первый',
+  'second' = 'второй',
+}
 
 export interface Timetable {
   id: number

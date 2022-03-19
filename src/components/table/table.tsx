@@ -1,11 +1,10 @@
 import React, { createContext, ReactNode, VFC } from 'react'
-import { Table as TableUI } from '@chakra-ui/react'
+import { Box, Table as TableUI } from '@chakra-ui/react'
 import { TableBody } from 'components/table-body'
 import { TableHead } from 'components/table-head'
 
 export interface ObjectWithId {
   id: number
-  [key: string]: unknown
 }
 
 export interface TableProps<T extends ObjectWithId, S extends string[]> {
@@ -29,13 +28,20 @@ export const Table = <T extends ObjectWithId, S extends string[]>({
   renderCell,
 }: TableProps<T, S>) => {
   return (
-    <TableUI variant="simple">
-      <TableContext.Provider
-        value={{ data, columnNames: columnNames || Object.keys(data[0]), printCounter, renderCell }}
-      >
-        <TableHead />
-        <TableBody />
-      </TableContext.Provider>
-    </TableUI>
+    <Box overflowX="scroll">
+      <TableUI variant="simple">
+        <TableContext.Provider
+          value={{
+            data,
+            columnNames: columnNames || Object.keys(data[0]),
+            printCounter,
+            renderCell,
+          }}
+        >
+          <TableHead />
+          <TableBody />
+        </TableContext.Provider>
+      </TableUI>
+    </Box>
   )
 }

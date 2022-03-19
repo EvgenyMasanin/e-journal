@@ -12,7 +12,7 @@ const App = () => {
         <Header />
       </Box>
       <Box px={5} flex="0 1 88%" maxH="88%" overflow="hidden">
-        {/* <Main /> */}
+        <Main />
         <TimetableInfo lessons={lessons1} />
       </Box>
     </Flex>
