@@ -1,9 +1,9 @@
-import { Box, Flex, Stack } from '@chakra-ui/react'
+import { Box, chakra, Flex, Stack } from '@chakra-ui/react'
 import Header from 'components/header/header'
 import { lessons1 } from 'data'
 import { Main } from 'pages/main'
 import { TimetableInfo } from 'pages/timetable-info'
-import React from 'react'
+import React, { VFC } from 'react'
 
 const App = () => {
   return (
@@ -13,7 +13,7 @@ const App = () => {
       </Box>
       <Box px={5} flex="0 1 88%" maxH="88%" overflow="hidden">
         <Main />
-        <TimetableInfo lessons={lessons1} />
+        {/* <TimetableInfo lessons={lessons1} /> */}
       </Box>
     </Flex>
   )

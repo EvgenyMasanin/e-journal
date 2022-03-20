@@ -1,4 +1,4 @@
-import React, { VFC } from 'react'
+import { VFC } from 'react'
 import { ListItem, Text } from '@chakra-ui/react'
 
 export interface TimetableCardItemProps {

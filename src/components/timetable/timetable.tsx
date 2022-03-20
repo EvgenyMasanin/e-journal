@@ -1,27 +1,25 @@
-import React, { VFC } from 'react'
-import { Heading, SimpleGrid, Stack } from '@chakra-ui/react'
-import { TimetableCard } from 'components/timetable-card'
-import { Lesson, weekDaysRU } from 'types/timetable.types'
+import { createContext, VFC } from 'react'
+import { useBreakpointValue, VStack } from '@chakra-ui/react'
+import { TimetableCardSlider } from 'components/timetable/timetable-card-slider'
+import { TimetableCardsGrid } from './timetable-cards-grid'
+import { Lesson } from 'types/timetable.types'
 
 export interface TimetableProps {
-  lessons: Pick<Lesson, 'id' | 'subjectName' | 'lessonNumber'>[]
+  lessons: Lesson[]
 }
 
+export const TimetableContext = createContext<{ lessons: Lesson[] }>({
+  lessons: [],
+})
+
 export const Timetable: VFC<TimetableProps> = ({ lessons }) => {
+  const isLg = useBreakpointValue({ base: true, lg: false })
+
   return (
-    <Stack direction="column" h="100%" overflow="auto">
-      <SimpleGrid
-        columns={[1, null, null, 2, 3]}
-        justifyContent="space-around"
-        px={10}
-        py={5}
-        spacingX="80px"
-        spacingY={5}
-      >
-        {weekDaysRU.map((weekDay, i) => (
-          <TimetableCard key={i} lessons={lessons.slice(0, i)} weekDay={weekDay} />
-        ))}
-      </SimpleGrid>
-    </Stack>
+    <TimetableContext.Provider value={{ lessons }}>
+      <VStack h="100%" overflow="auto" justifyContent="center">
+        {!isLg ? <TimetableCardsGrid /> : <TimetableCardSlider />}
+      </VStack>
+    </TimetableContext.Provider>
   )
 }
