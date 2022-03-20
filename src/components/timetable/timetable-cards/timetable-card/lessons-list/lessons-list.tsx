@@ -1,4 +1,4 @@
-import  { VFC } from 'react'
+import { VFC } from 'react'
 import { List } from '@chakra-ui/react'
 import { TimetableCardPlaceholder } from '../timetable-card-placeholder'
 import { LessonItem } from '../lesson-item'
@@ -9,7 +9,7 @@ export interface LessonsListProps {
 }
 
 export const LessonsList: VFC<LessonsListProps> = ({ lessons }) => {
-  const isLessonsEmpty = lessons.length
+  const isLessonsEmpty = lessons.length === 0
 
   return isLessonsEmpty ? (
     <TimetableCardPlaceholder />
