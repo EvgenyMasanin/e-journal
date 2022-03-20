@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, VFC } from 'react'
 import { Box, Table as TableUI } from '@chakra-ui/react'
-import { TableBody } from 'components/table-body'
-import { TableHead } from 'components/table-head'
+import { TableBody } from 'components/table/table-body'
+import { TableHead } from 'components/table/table-head'
 
 export interface ObjectWithId {
   id: number
