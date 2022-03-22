@@ -1,11 +1,10 @@
+import { apiConfig } from './api-config'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Teacher } from 'types/teacher'
 
-const baseUrl = 'http://localhost:7000/'
-
 export const teachersApi = createApi({
   reducerPath: 'teachers',
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl: apiConfig.baseUrl }),
   endpoints: (build) => ({
     getTeachers: build.query<Teacher[], string>({
       query: () => 'teachers',
