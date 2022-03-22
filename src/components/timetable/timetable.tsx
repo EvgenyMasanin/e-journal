@@ -13,12 +13,12 @@ export const TimetableContext = createContext<{ lessons: Lesson[] }>({
 })
 
 export const Timetable: VFC<TimetableProps> = ({ lessons }) => {
-  const isLg = useBreakpointValue({ base: true, lg: false })
+  const isMd = useBreakpointValue({ base: true, md: false })
 
   return (
     <TimetableContext.Provider value={{ lessons }}>
       <VStack h="100%" overflow="auto" justifyContent="center">
-        {!isLg ? <TimetableCardsGrid /> : <TimetableCardSlider />}
+        {!isMd ? <TimetableCardsGrid /> : <TimetableCardSlider />}
       </VStack>
     </TimetableContext.Provider>
   )

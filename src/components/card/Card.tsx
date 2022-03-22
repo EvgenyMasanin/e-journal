@@ -8,7 +8,7 @@ const Card: FC<BoxProps> = (props) => (
       py="6"
       px={{ base: '4', md: '10' }}
       shadow="base"
-      rounded={{ sm: 'lg' }}
+      rounded="lg"
       {...props}
     />
   </Center>

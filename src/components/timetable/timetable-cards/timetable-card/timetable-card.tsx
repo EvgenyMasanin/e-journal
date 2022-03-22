@@ -1,4 +1,11 @@
-import { forwardRef, Heading, LinkBox, LinkOverlay, Stack } from '@chakra-ui/react'
+import {
+  forwardRef,
+  Heading,
+  LinkBox,
+  LinkOverlay,
+  Stack,
+  useBreakpointValue,
+} from '@chakra-ui/react'
 import { Card } from 'components/card'
 import { LessonsList } from './lessons-list'
 import { useWeekDay } from 'hooks/useWeekDay'
@@ -20,6 +27,8 @@ export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(({ lessons, w
 
   const isToday = today === weekDay
 
+  const isLg = useBreakpointValue({ base: 1, lg: 1.1 })
+
   return (
     <LinkBox ref={isToday ? ref : null} className={s.linkBox}>
       <Card
@@ -28,12 +37,12 @@ export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(({ lessons, w
         flexGrow={1}
         cursor="pointer"
         position="relative"
-        transform={`scale(${isToday ? 1 : 0.9})`}
+        transform={`scale(${isToday ? 0.95 : 0.9})`}
         borderColor={borderColor}
         borderStyle="solid"
         borderWidth={isToday ? 5 : 0}
         transition=".3s"
-        _hover={{ transform: 'scale(1.1)' }}
+        _hover={{ transform: `scale(${isLg})` }}
       >
         <Stack textAlign="center" h="100%">
           <LinkOverlay href="http://google.com">

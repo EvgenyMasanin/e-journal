@@ -13,6 +13,7 @@ export const TimetableCardsGrid: VFC<TimetableCardsGridProps> = ({}) => {
       py={5}
       spacingX="80px"
       spacingY={5}
+      overflowY="auto"
     >
       <TimetableCards />
     </SimpleGrid>
