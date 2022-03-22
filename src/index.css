@@ -10,9 +10,15 @@ html[data-theme='dark'] *::-webkit-scrollbar-thumb {
 html[data-theme='light'] *::-webkit-scrollbar-thumb {
   background: var(--chakra-colors-teal-500);
 }
+html[data-theme='dark'] *::-webkit-scrollbar-track {
+  border: 1px solid var(--chakra-colors-teal-200);
+}
+html[data-theme='light'] *::-webkit-scrollbar-track {
+  border: 1px solid var(--chakra-colors-teal-500);
+}
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  border-radius: 5px;
   width: 1px;
   background-clip: content-box;
 }
