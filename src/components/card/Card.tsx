@@ -6,7 +6,7 @@ const Card: FC<BoxProps> = (props) => (
     <Box
       bg={useColorModeValue('white', 'gray.700')}
       py="6"
-      px={{ base: '4', md: '10' }}
+      px={{ base: '4', md: '6' }}
       shadow="base"
       rounded="lg"
       {...props}

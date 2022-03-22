@@ -5,11 +5,12 @@ import { lessons1 } from 'data'
 import { Main } from 'pages/main'
 import { TimetableInfo } from 'pages/timetable-info'
 import { useGetTeacherQuery, useGetTeachersQuery } from 'services/teachersService'
+import { useGetTeachersTimetablesQuery } from 'services/timetableService'
 import { Teacher } from 'types/teacher'
 
 const App = () => {
   const { data = [] } = useGetTeachersQuery('')
-  const { data: teacher, isError, isLoading } = useGetTeacherQuery(1)
+  const { data: teacher, isError } = useGetTeacherQuery(1)
 
   return (
     <Flex direction="column" h="100%">

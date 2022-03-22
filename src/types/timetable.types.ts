@@ -72,3 +72,14 @@ export interface Timetable {
   auditorium: number
   campus: number
 }
+
+export type WeekTimetableGroup = Omit<Group, 'subGroupsCount'> & {
+  subGroupNum: SubGroupNumber | 'all'
+}
+
+export type WeekTimetable = Omit<Timetable, 'group' | 'groupId' | 'subGroupNum'> & {
+  groups: WeekTimetableGroup[]
+  subject: { id: number; name: string; subGroupNum: SubGroupNumber | 'all' }
+}
+
+export type Week = Record<WeekDaysEN, WeekTimetable[]>
