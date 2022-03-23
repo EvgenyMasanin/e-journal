@@ -1,6 +1,6 @@
 import { apiConfig } from './api-config'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Teacher } from 'types/teacher'
+import { Teacher } from 'types'
 
 export const teachersApi = createApi({
   reducerPath: 'teachers',

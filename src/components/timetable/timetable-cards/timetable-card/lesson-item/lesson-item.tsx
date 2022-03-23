@@ -1,6 +1,6 @@
 import { VFC } from 'react'
 import { ListItem, Tag, Text } from '@chakra-ui/react'
-import { SubjectTypes, SubjectTypesAbbreviationMap } from 'types/subject.types'
+import { SubjectTypes, SubjectTypesAbbreviationMap } from 'types'
 
 export interface TimetableCardItemProps {
   lessonNumber: number

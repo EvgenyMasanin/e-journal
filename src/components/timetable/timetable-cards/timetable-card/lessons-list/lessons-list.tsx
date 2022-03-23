@@ -2,7 +2,7 @@ import { VFC } from 'react'
 import { List } from '@chakra-ui/react'
 import { TimetableCardPlaceholder } from '../timetable-card-placeholder'
 import { LessonItem } from '../lesson-item'
-import { WeekTimetable } from 'types/timetable.types'
+import { WeekTimetable } from 'types'
 
 export interface LessonsListProps {
   weekTimetables: WeekTimetable[]

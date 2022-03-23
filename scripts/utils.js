@@ -28,7 +28,7 @@ const generateIndexContent = (componentName) =>
 `
 
 const generateComponentContent = (componentName) =>
-  `import React, { VFC } from 'react'
+  `import { VFC } from 'react'
 
 export interface ${componentName}Props {}
 

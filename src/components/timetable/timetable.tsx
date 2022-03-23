@@ -1,10 +1,10 @@
 import { createContext, useState, VFC } from 'react'
-import { Badge, Heading, Text, useBreakpointValue, VStack } from '@chakra-ui/react'
+import { Heading, Text, useBreakpointValue, VStack } from '@chakra-ui/react'
 import { TimetableCardSlider } from 'components/timetable/timetable-card-slider'
 import { TimetableCardsGrid } from './timetable-cards-grid'
-import { Lesson, Week, WeekType } from 'types/timetable.types'
+import { Week, WeekType } from 'types'
 import usePrimaryColor from 'hooks/usePrimaryColor'
-import { useHoverColor } from 'hooks/useHoverColur'
+import { useHoverColor } from 'hooks/useHoverColor'
 
 export interface TimetableProps {
   week: Week

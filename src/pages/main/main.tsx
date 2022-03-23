@@ -1,8 +1,5 @@
-import React, { createContext, VFC } from 'react'
-import { Box } from '@chakra-ui/react'
+import { VFC } from 'react'
 import { Timetable } from 'components/timetable'
-import { lessons, lessons1 } from 'data'
-import { Lesson } from 'types/timetable.types'
 import { useGetTeachersTimetablesQuery } from 'services/timetableService'
 
 export interface MainProps {}

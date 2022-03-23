@@ -1,4 +1,4 @@
-import { WeekDaysRU } from 'types/timetable.types'
+import { WeekDaysRU } from 'types'
 import capitalizeFirst from './capitalizeFirst'
 
 const getWeekDay = () =>

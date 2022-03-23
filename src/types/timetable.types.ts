@@ -1,5 +1,4 @@
-import { Group, SubGroupNumber } from './group.types'
-import { SubjectTypes } from './subject.types'
+import { SubjectTypes, Group, SubGroupNumber } from '.'
 
 export enum WeekDaysMap {
   'Понедельник' = 'monday',
@@ -58,7 +57,6 @@ export interface Timetable {
   id: number
   subjectId: number
   groupId: number
-  groupName: string
   subGroupsCount: SubGroupNumber
   subGroupNum: SubGroupNumber
   weekDay: WeekDaysEN
@@ -79,7 +77,7 @@ export type WeekTimetableGroup = Omit<Group, 'subGroupsCount'> & {
 
 export type WeekTimetable = Omit<Timetable, 'group' | 'groupId' | 'subGroupNum'> & {
   groups: WeekTimetableGroup[]
-  subject: { id: number; name: string; subGroupNum: SubGroupNumber | 'all' }
+  subject: { id: number; name: string; subGroupNum: SubGroupNumber }
 }
 
 export type Week = Record<WeekDaysEN, WeekTimetable[]>

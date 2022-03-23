@@ -1,7 +1,7 @@
 import { forwardRef } from '@chakra-ui/react'
 import useTimetableContext from 'components/timetable/hooks/useTimetableContest'
 import { TimetableCard } from './timetable-card/timetable-card'
-import { WeekDaysMap, weekDaysRU } from 'types/timetable.types'
+import { WeekDaysMap, weekDaysRU } from 'types'
 
 export interface TimetableCardsProps {}
 

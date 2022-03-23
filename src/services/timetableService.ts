@@ -1,4 +1,4 @@
-import { Week } from './../types/timetable.types'
+import { Week } from './../types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 import { apiConfig } from './api-config'
 

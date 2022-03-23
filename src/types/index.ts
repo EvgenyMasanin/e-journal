@@ -7,3 +7,8 @@ function getEnumKeyByEnumValue<T extends Record<string, string | number>>(
 }
 
 export default getEnumKeyByEnumValue
+
+export * from './timetable.types'
+export * from './group.types'
+export * from './subject.types'
+export * from './teacher'

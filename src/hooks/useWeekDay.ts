@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { WeekDaysRU } from 'types/timetable.types'
-import capitalizeFirst from 'utils/capitalizeFirst'
+import { WeekDaysRU } from 'types'
 import getWeekDay from 'utils/getWeekDay'
 
 export const useWeekDay = () => {
