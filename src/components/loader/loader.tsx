@@ -1,5 +1,5 @@
 import { Center, Spinner } from '@chakra-ui/react'
-import usePrimaryColor from 'hooks/usePrimaryColor'
+import { usePrimaryColor } from 'hooks/usePrimaryColor'
 import { VFC } from 'react'
 
 export interface LoaderProps {}

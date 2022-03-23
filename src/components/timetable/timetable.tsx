@@ -3,7 +3,7 @@ import { Heading, Text, useBreakpointValue, VStack } from '@chakra-ui/react'
 import { TimetableCardSlider } from 'components/timetable/timetable-card-slider'
 import { TimetableCardsGrid } from './timetable-cards-grid'
 import { Week, WeekType } from 'types'
-import usePrimaryColor from 'hooks/usePrimaryColor'
+import { usePrimaryColor } from 'hooks/usePrimaryColor'
 import { useHoverColor } from 'hooks/useHoverColor'
 
 export interface TimetableProps {

@@ -9,11 +9,12 @@ import {
 import { Card } from 'components/card'
 import { LessonsList } from './lessons-list'
 import { useWeekDay } from 'hooks/useWeekDay'
-import usePrimaryColor from 'hooks/usePrimaryColor'
+import { Link } from 'react-router-dom'
+import { usePrimaryColor } from 'hooks/usePrimaryColor'
 import useTimetableContext from 'components/timetable/hooks/useTimetableContest'
-import { WeekDaysRU, WeekTimetable } from 'types'
-import s from './timetable-card.module.css'
 import { weekTimetableFilter } from 'utils/week-timetable-filter'
+import { WeekDaysMap, WeekDaysRU, WeekTimetable } from 'types'
+import s from './timetable-card.module.css'
 
 export interface TimetableCardProps {
   weekTimetables: WeekTimetable[]
@@ -53,7 +54,10 @@ export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(
           _hover={{ transform: `scale(${isLg})` }}
         >
           <Stack textAlign="center" h="100%">
-            <LinkOverlay href="/timetable-info">
+            <LinkOverlay
+              as={Link}
+              to={`/timetable-info/10?week_day=${WeekDaysMap[weekDay]}&week_type=${weekType}`}
+            >
               <Heading as="h3" size="lg">
                 {weekDay}
               </Heading>

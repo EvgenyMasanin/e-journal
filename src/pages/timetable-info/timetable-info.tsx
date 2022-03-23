@@ -1,7 +1,10 @@
-import { useRef, VFC } from 'react'
+import { useEffect, useRef, useState, VFC } from 'react'
 import { Box, Heading, Link, Text } from '@chakra-ui/react'
 import { Table } from 'components/table'
-import usePrimaryColor from 'hooks/usePrimaryColor'
+import { useParams, useSearchParams } from 'react-router-dom'
+import { useDate } from 'hooks/useDate'
+import { usePrimaryColor } from 'hooks/usePrimaryColor'
+import { useGetTeachersTimetablesQuery } from 'services/timetableService'
 import { weekTimetableFilter } from 'utils/week-timetable-filter'
 import getEnumKeyByEnumValue, {
   SubjectTypesMap,
@@ -11,9 +14,8 @@ import getEnumKeyByEnumValue, {
   WeekTimetable,
   WeekType,
   WeekTypeMap,
-  Week,
+  Semester,
 } from 'types'
-import { useDate } from 'hooks/useDate'
 
 const mapLessons = (lessons: WeekTimetable[]) =>
   lessons.map(
@@ -39,14 +41,45 @@ const mapLessons = (lessons: WeekTimetable[]) =>
     })
   )
 
-export interface TimetableInfoProps {
-  week: Week
-  weekDay: WeekDaysEN
-  weekType: WeekType
-  isLoading: boolean
+export interface TimetableInfoProps {}
+
+export interface TimetableInfoParams extends Record<string, string> {
+  teacher_id: string
 }
 
-export const TimetableInfo: VFC<TimetableInfoProps> = ({ isLoading, week, weekDay, weekType }) => {
+export const TimetableInfo: VFC<TimetableInfoProps> = ({}) => {
+  const [weekDay, setWeekDay] = useState<WeekDaysEN>()
+  const [weekType, setWeekType] = useState<WeekType>()
+
+  const params = useParams<TimetableInfoParams>()
+
+  const [searchParams] = useSearchParams()
+
+  useEffect(() => {
+    setWeekDay(searchParams.get('week_day') as WeekDaysEN)
+    setWeekType(searchParams.get('week_type') as WeekType)
+  }, [searchParams])
+
+  const { data: week, isLoading, isError } = useGetTeachersTimetablesQuery(+params.teacher_id)
+
+  const color = usePrimaryColor()
+
+  const date = useDate()
+
+  const [lessons, setLessons] = useState<WeekTimetable[]>([])
+
+  const [semester, setSemester] = useState<Semester>()
+
+  useEffect(() => {
+    if (isLoading || isError || !weekDay) return
+    const lessons = week[weekDay]
+
+    if (!lessons) return
+
+    setLessons(lessons)
+    setSemester(lessons[0]?.semester)
+  }, [weekDay, isLoading, week, isError, lessons])
+
   const columnNames = useRef([
     'Номер пары',
     'Предмет',
@@ -58,29 +91,20 @@ export const TimetableInfo: VFC<TimetableInfoProps> = ({ isLoading, week, weekDa
     'курс',
   ])
 
-  const color = usePrimaryColor()
-
-  const date = useDate()
-
-  const lessons = week?.[weekDay]
-
-  const semester = lessons?.[0].semester
   return (
     <Box>
       <Heading mb={3} size="lg">
         Расписание на{' '}
         <Text as="i" color={color}>
-          {getEnumKeyByEnumValue(WeekDaysMap, weekDay.toLowerCase()).toLowerCase()}:{' '}
+          {getEnumKeyByEnumValue(WeekDaysMap, weekDay?.toLowerCase()).toLowerCase()}:{' '}
         </Text>
         {date}
       </Heading>
       <Heading mb={3} size="md">
         Семестр:{' '}
-        {!isLoading && (
-          <Text as="i" color={color}>
-            {SemesterMap[semester]}
-          </Text>
-        )}
+        <Text as="i" color={color}>
+          {SemesterMap[semester]}
+        </Text>
       </Heading>
       <Heading mb={5} size="md">
         Тип недели:{' '}

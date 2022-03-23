@@ -14,16 +14,28 @@ import {
 import { FaSignOutAlt } from 'react-icons/fa'
 import { IoIosJournal } from 'react-icons/io'
 import { ColorModeSwitcher } from 'components/color-mode-switcher'
+import { Link } from 'react-router-dom'
+import { useHoverColor } from 'hooks/useHoverColor'
 
 const Header: VFC = () => {
   const color = useColorModeValue('black', 'teal.200')
+
+  const { color: hoverColor, bgColor } = useHoverColor()
 
   return (
     <Flex>
       <Center>
         <Heading display="flex" alignItems="center" fontSize="4xl">
-          <Icon as={IoIosJournal} color={color} marginRight="10px" />
-          <Text>Электронный журнал</Text>
+          <Link
+            to="/"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Icon as={IoIosJournal} color={color} marginRight="10px" />
+            <Text _hover={{ textDecoration: 'none', color: hoverColor }}>Электронный журнал</Text>
+          </Link>
         </Heading>
       </Center>
       <Spacer />

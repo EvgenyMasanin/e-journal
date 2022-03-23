@@ -8,7 +8,11 @@ export const store = configureStore({
     [timetableApi.reducerPath]: timetableApi.reducer,
   },
 
-  middleware: (getDefaultMiddleware) => [...getDefaultMiddleware(), teachersApi.middleware],
+  middleware: (getDefaultMiddleware) => [
+    ...getDefaultMiddleware(),
+    teachersApi.middleware,
+    timetableApi.middleware,
+  ],
 })
 
 export type RootState = ReturnType<typeof store.getState>
