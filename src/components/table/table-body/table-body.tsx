@@ -1,24 +1,21 @@
-import { Tbody, Td, Tr } from '@chakra-ui/react'
+import { VFC } from 'react'
+import { Tbody } from '@chakra-ui/react'
+import { TableRow } from '../table-row'
 import useTableContext from 'components/table/hooks/useTableContext'
-import React, { VFC } from 'react'
+import { TableLoader } from '../table-loader'
 
 export const TableBody: VFC = () => {
-  const { data, columnNames, printCounter, renderCell } = useTableContext()
+  const { data, isLoading, printIds } = useTableContext()
 
   return (
     <Tbody>
-      {data.map(({ id, ...data }, i) => (
-        <Tr key={id}>
-          {printCounter && <Td>{i + 1}</Td>}
-          {Object.entries(data).map(([objectKey, value], i) => {
-            const key = `${objectKey} - ${id}`
-            const colName = columnNames.length !== 0 ? columnNames[i] : objectKey
-            const Cell = renderCell?.(colName, value)
-
-            return <Td key={key}>{Cell ? Cell : value}</Td>
-          })}
-        </Tr>
-      ))}
+      {isLoading ? (
+        <TableLoader />
+      ) : (
+        data.map(({ id, ...data }, i) => (
+          <TableRow key={id} rowNumber={i} data={printIds ? { id, ...data } : data} />
+        ))
+      )}
     </Tbody>
   )
 }

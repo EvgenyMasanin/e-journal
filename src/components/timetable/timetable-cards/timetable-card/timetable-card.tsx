@@ -11,8 +11,9 @@ import { LessonsList } from './lessons-list'
 import { useWeekDay } from 'hooks/useWeekDay'
 import usePrimaryColor from 'hooks/usePrimaryColor'
 import useTimetableContext from 'components/timetable/hooks/useTimetableContest'
-import { WeekDaysRU, WeekTimetable } from 'types/timetable.types'
+import { WeekDaysRU, WeekTimetable } from 'types'
 import s from './timetable-card.module.css'
+import { weekTimetableFilter } from 'utils/week-timetable-filter'
 
 export interface TimetableCardProps {
   weekTimetables: WeekTimetable[]
@@ -23,9 +24,7 @@ export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(
   ({ weekTimetables, weekDay }, ref) => {
     const { weekType } = useTimetableContext()
 
-    const filteredWeekTimetables = weekTimetables.filter((w) =>
-      w.weekType.split('/').includes(weekType)
-    )
+    const filteredWeekTimetables = weekTimetables.filter(weekTimetableFilter(weekType))
 
     const sortedWeekTimetables = [...filteredWeekTimetables].sort(
       (a, b) => a.lessonNumber - b.lessonNumber
