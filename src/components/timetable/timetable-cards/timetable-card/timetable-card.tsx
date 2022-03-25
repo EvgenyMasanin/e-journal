@@ -23,9 +23,9 @@ export interface TimetableCardProps {
 
 export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(
   ({ weekTimetables, weekDay }, ref) => {
-    const { weekType } = useTimetableContext()
+    const { weekType, semester } = useTimetableContext()
 
-    const filteredWeekTimetables = weekTimetables.filter(weekTimetableFilter(weekType))
+    const filteredWeekTimetables = weekTimetables.filter(weekTimetableFilter(weekType, semester))
 
     const sortedWeekTimetables = [...filteredWeekTimetables].sort(
       (a, b) => a.lessonNumber - b.lessonNumber
@@ -50,13 +50,13 @@ export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(
           borderColor={borderColor}
           borderStyle="solid"
           borderWidth={isToday ? 5 : 0}
-          transition=".3s"
+          transition="transform .3s"
           _hover={{ transform: `scale(${isLg})` }}
         >
           <Stack textAlign="center" h="100%">
             <LinkOverlay
               as={Link}
-              to={`/timetable-info/10?week_day=${WeekDaysMap[weekDay]}&week_type=${weekType}`}
+              to={`/timetable-info/10?week_day=${WeekDaysMap[weekDay]}&week_type=${weekType}&semester=${semester}`}
             >
               <Heading as="h3" size="lg">
                 {weekDay}

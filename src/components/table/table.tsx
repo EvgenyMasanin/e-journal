@@ -13,7 +13,7 @@ export interface TableProps<T extends ObjectWithId, S extends string[]> {
   printCounter?: boolean
   printIds?: boolean
   isLoading?: boolean
-  renderCell?: (columnName: string, value: unknown) => ReactNode
+  renderCell?: (columnName: string, value: string | number) => ReactNode
 }
 
 export const TableContext = createContext<{
@@ -22,7 +22,7 @@ export const TableContext = createContext<{
   printCounter?: boolean
   printIds?: boolean
   isLoading?: boolean
-  renderCell?: (columnName: string, value: unknown) => ReactNode
+  renderCell?: (columnName: string, value: string | number) => ReactNode
 }>(null)
 
 export const Table = <T extends ObjectWithId, S extends string[]>({

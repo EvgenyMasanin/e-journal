@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, VFC } from 'react'
-import { Box, Heading, Link, Text } from '@chakra-ui/react'
+import { Box, Center, Flex, Heading, Link, SimpleGrid, Tag, Text, Wrap } from '@chakra-ui/react'
 import { Table } from 'components/table'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useDate } from 'hooks/useDate'
@@ -36,7 +36,7 @@ const mapLessons = (lessons: WeekTimetable[]) =>
       auditorium,
       campus,
       groupNames: groups.map((g) => g.name).join(),
-      subGroupNum: groups[0].subGroupNum,
+      subGroupNum: groups[0].subGroupNum === 'all' ? 'все' : groups[0].subGroupNum,
       course,
     })
   )
@@ -50,6 +50,7 @@ export interface TimetableInfoParams extends Record<string, string> {
 export const TimetableInfo: VFC<TimetableInfoProps> = ({}) => {
   const [weekDay, setWeekDay] = useState<WeekDaysEN>()
   const [weekType, setWeekType] = useState<WeekType>()
+  const [semester, setSemester] = useState<Semester>()
 
   const params = useParams<TimetableInfoParams>()
 
@@ -58,6 +59,7 @@ export const TimetableInfo: VFC<TimetableInfoProps> = ({}) => {
   useEffect(() => {
     setWeekDay(searchParams.get('week_day') as WeekDaysEN)
     setWeekType(searchParams.get('week_type') as WeekType)
+    setSemester(searchParams.get('semester') as Semester)
   }, [searchParams])
 
   const { data: week, isLoading, isError } = useGetTeachersTimetablesQuery(+params.teacher_id)
@@ -68,8 +70,6 @@ export const TimetableInfo: VFC<TimetableInfoProps> = ({}) => {
 
   const [lessons, setLessons] = useState<WeekTimetable[]>([])
 
-  const [semester, setSemester] = useState<Semester>()
-
   useEffect(() => {
     if (isLoading || isError || !weekDay) return
     const lessons = week[weekDay]
@@ -77,7 +77,6 @@ export const TimetableInfo: VFC<TimetableInfoProps> = ({}) => {
     if (!lessons) return
 
     setLessons(lessons)
-    setSemester(lessons[0]?.semester)
   }, [weekDay, isLoading, week, isError, lessons])
 
   const columnNames = useRef([
@@ -116,15 +115,27 @@ export const TimetableInfo: VFC<TimetableInfoProps> = ({}) => {
       <Table
         isLoading={isLoading}
         renderCell={(colName, value) => {
-          if (colName === 'Предмет')
+          if (colName === 'Предмет') {
             return (
               <Link href="/" fontSize="xl" fontWeight="bold" color={color}>
                 {value}
               </Link>
             )
+          }
+          if (colName === 'Группа' && typeof value === 'string') {
+            return (
+              <Wrap justifyContent="space-around">
+                {value.split(',').map((groupName) => (
+                  <Center key={groupName}>
+                    <Tag colorScheme="teal">{groupName}</Tag>
+                  </Center>
+                ))}
+              </Wrap>
+            )
+          }
         }}
         columnNames={columnNames.current}
-        data={!isLoading && mapLessons(lessons.filter(weekTimetableFilter(weekType)))}
+        data={!isLoading && mapLessons(lessons.filter(weekTimetableFilter(weekType, semester)))}
       />
     </Box>
   )

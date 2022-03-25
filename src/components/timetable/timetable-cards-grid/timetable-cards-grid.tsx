@@ -11,6 +11,7 @@ export const TimetableCardsGrid: VFC<TimetableCardsGridProps> = ({}) => {
       justifyContent="space-around"
       px={10}
       py={5}
+      w="100%"
       spacingX="80px"
       spacingY={5}
       overflowY="auto"

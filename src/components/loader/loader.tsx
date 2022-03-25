@@ -1,4 +1,4 @@
-import { Center, Spinner } from '@chakra-ui/react'
+import { Center, HStack, Spinner } from '@chakra-ui/react'
 import { usePrimaryColor } from 'hooks/usePrimaryColor'
 import { VFC } from 'react'
 
@@ -8,8 +8,10 @@ export const Loader: VFC<LoaderProps> = ({}) => {
   const color = usePrimaryColor()
 
   return (
-    <Center>
-      <Spinner thickness="6px" speed="0.75s" emptyColor="gray.200" color={color} size="xl" />
+    <Center h="100%">
+      <HStack h="100%">
+        <Spinner thickness="6px" speed="0.75s" emptyColor="gray.200" color={color} size="xl" />
+      </HStack>
     </Center>
   )
 }

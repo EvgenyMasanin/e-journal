@@ -7,5 +7,5 @@ export interface MainProps {}
 export const Main: VFC<MainProps> = ({}) => {
   const { data: timetables, isLoading } = useGetTeachersTimetablesQuery(10)
 
-  return <>{!isLoading && <Timetable week={timetables} />}</>
+  return <Timetable week={timetables} isLoading={isLoading} />
 }

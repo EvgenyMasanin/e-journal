@@ -4,7 +4,7 @@ import useTableContext from '../hooks/useTableContext'
 
 export interface TimetableCellProps {
   colName: string
-  value: unknown
+  value: string | number
 }
 
 export const TableCell: VFC<TimetableCellProps> = ({ colName, value }) => {
