@@ -1,10 +1,10 @@
-import { apiConfig } from './api-config'
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 import { Teacher } from 'types'
+import { baseQueryWithReauth } from './api-config'
 
 export const teachersApi = createApi({
   reducerPath: 'teachers',
-  baseQuery: fetchBaseQuery({ baseUrl: apiConfig.baseUrl }),
+  baseQuery: baseQueryWithReauth,
   endpoints: (build) => ({
     getTeachers: build.query<Teacher[], string>({
       query: () => 'teachers',
