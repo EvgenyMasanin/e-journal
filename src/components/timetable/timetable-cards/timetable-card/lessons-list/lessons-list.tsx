@@ -14,7 +14,7 @@ export const LessonsList: VFC<LessonsListProps> = ({ weekTimetables }) => {
   return isLessonsEmpty ? (
     <TimetableCardPlaceholder />
   ) : (
-    <List h="100%" overflow="hidden">
+    <List h="full" overflow="hidden">
       {weekTimetables.map(({ id, lessonNumber: number, subjectType, subject: { name } }) => (
         <LessonItem key={id} subjectName={name} subjectType={subjectType} lessonNumber={number} />
       ))}

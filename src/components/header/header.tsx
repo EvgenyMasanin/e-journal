@@ -1,10 +1,9 @@
-import React, { VFC } from 'react'
+import { VFC } from 'react'
 import {
   Flex,
   Button,
   Icon,
   useColorModeValue,
-  Box,
   Center,
   HStack,
   Spacer,
@@ -14,13 +13,23 @@ import {
 import { FaSignOutAlt } from 'react-icons/fa'
 import { IoIosJournal } from 'react-icons/io'
 import { ColorModeSwitcher } from 'components/color-mode-switcher'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useHoverColor } from 'hooks/useHoverColor'
+import { useActions } from 'redux-store/hooks'
 
 const Header: VFC = () => {
   const color = useColorModeValue('black', 'teal.200')
 
-  const { color: hoverColor, bgColor } = useHoverColor()
+  const { color: hoverColor } = useHoverColor()
+  const location = useLocation()
+
+  const isAuthPAge = location.pathname === '/auth'
+
+  const { logOut } = useActions()
+
+  const handleClick = () => {
+    logOut()
+  }
 
   return (
     <Flex>
@@ -44,11 +53,13 @@ const Header: VFC = () => {
         <Center>
           <ColorModeSwitcher justifySelf="flex-end" />
         </Center>
-        <Center w="100px">
-          <Button colorScheme="teal" size="md" leftIcon={<FaSignOutAlt />}>
-            Выйти
-          </Button>
-        </Center>
+        {!isAuthPAge && (
+          <Center w="100px">
+            <Button colorScheme="teal" size="md" leftIcon={<FaSignOutAlt />} onClick={handleClick}>
+              Выйти
+            </Button>
+          </Center>
+        )}
       </HStack>
     </Flex>
   )

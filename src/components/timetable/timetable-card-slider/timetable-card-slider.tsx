@@ -9,7 +9,7 @@ export const TimetableCardSlider: VFC<TableCardSliderProps> = () => {
   const { parentRef, childRef } = useHScroll<HTMLDivElement, HTMLDivElement>()
 
   return (
-    <HStack ref={parentRef} w="100%" p={5} alignItems="stretch" overflowX="auto">
+    <HStack ref={parentRef} w="full" p={5} alignItems="stretch" overflowX="auto">
       <TimetableCards ref={childRef} />
     </HStack>
   )

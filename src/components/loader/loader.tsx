@@ -8,8 +8,8 @@ export const Loader: VFC<LoaderProps> = ({}) => {
   const color = usePrimaryColor()
 
   return (
-    <Center h="100%">
-      <HStack h="100%">
+    <Center h="full">
+      <HStack h="full">
         <Spinner thickness="6px" speed="0.75s" emptyColor="gray.200" color={color} size="xl" />
       </HStack>
     </Center>
