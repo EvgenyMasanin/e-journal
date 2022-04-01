@@ -9,6 +9,15 @@ export enum WeekDaysMap {
   'Суббота' = 'saturday',
 }
 
+export const weekDaysEn = [
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+] as const
+
 export const weekDaysRU = [
   'Понедельник',
   'Вторник',
@@ -18,8 +27,8 @@ export const weekDaysRU = [
   'Суббота',
 ] as const
 
-export type WeekDaysRU = keyof typeof WeekDaysMap
-export type WeekDaysEN = `${WeekDaysMap}`
+export type WeekDaysRU = typeof weekDaysRU[number]
+export type WeekDaysEN = typeof weekDaysEn[number]
 
 export const weekType = ['up', 'down', 'up/down'] as const
 export type WeekType = typeof weekType[number]
