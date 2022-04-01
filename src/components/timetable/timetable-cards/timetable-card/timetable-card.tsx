@@ -16,7 +16,7 @@ import { weekTimetableFilter } from 'utils/week-timetable-filter'
 import { WeekDaysMap, WeekDaysRU, WeekTimetable } from 'types'
 import s from './timetable-card.module.css'
 import { useTypedSelector } from 'redux-store/hooks'
-import { selectUserId } from 'redux-store/reducers/user.slice'
+import { selectTeacherId } from 'redux-store/reducers/user.slice'
 import { TeacherPaths } from 'routes'
 
 export interface TimetableCardProps {
@@ -26,7 +26,7 @@ export interface TimetableCardProps {
 
 export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(
   ({ weekTimetables, weekDay }, ref) => {
-    const userId = useTypedSelector(selectUserId)
+    const teacherId = useTypedSelector(selectTeacherId)
 
     const { weekType, semester } = useTimetableContext()
 
@@ -61,7 +61,7 @@ export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(
           <Stack textAlign="center" h="full">
             <LinkOverlay
               as={Link}
-              to={`/${TeacherPaths.teacher}/${TeacherPaths.timetableInfo}/${userId}?week_day=${WeekDaysMap[weekDay]}&week_type=${weekType}&semester=${semester}`}
+              to={`/${TeacherPaths.teacher}/${TeacherPaths.timetableInfo}/${teacherId}?week_day=${WeekDaysMap[weekDay]}&week_type=${weekType}&semester=${semester}`}
             >
               <Heading as="h3" size="lg">
                 {weekDay}

@@ -3,6 +3,9 @@ import { persistStore } from 'redux-persist'
 import { persistedReducer, serializableCheck } from './persist'
 import { timetableApi } from 'services/timetableService'
 import { teachersApi } from 'services/teachersService'
+import { authApi } from 'services/authService'
+import { mistakesApi } from 'services/mistakeService'
+import { subjectsApi } from 'services/subjectsService'
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -11,8 +14,11 @@ export const store = configureStore({
     ...getDefaultMiddleware({
       serializableCheck,
     }),
+    authApi.middleware,
     teachersApi.middleware,
     timetableApi.middleware,
+    mistakesApi.middleware,
+    subjectsApi.middleware,
   ],
 })
 
