@@ -16,16 +16,15 @@ export const Redirector: VFC = () => {
   } = useTypedSelector((state) => state.user)
 
   const user = useTypedSelector(selectUser)
-  console.log('🚀 ~ user', user)
 
   const roles = useTypedSelector(selectUserRoles)
 
   const navigator = useNavigate()
   const { pathname } = useLocation()
 
-  useEffect(() => {
-    if (isAuthorized && !user) navigator(Paths.main)
-  }, [isAuthorized, user, navigator])
+  // useEffect(() => {
+  //   if (isAuthorized && !user) navigator(Paths.main)
+  // }, [isAuthorized, user, navigator])
 
   useEffect(() => {
     if (pathname === Paths.auth) return
@@ -40,9 +39,9 @@ export const Redirector: VFC = () => {
   }, [isAuthorized, navigator, pathname])
 
   useEffect(() => {
-    if (isAuthorized && pathname === Paths.main)
+    if (isAuthorized && pathname === Paths.main && user)
       navigator(isAdmin(roles) ? AdminPaths.admin : TeacherPaths.teacher)
-  }, [isAuthorized, navigator, pathname, roles])
+  }, [isAuthorized, navigator, pathname, roles, user])
 
   return null
 }

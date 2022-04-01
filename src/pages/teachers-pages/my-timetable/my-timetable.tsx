@@ -4,20 +4,19 @@ import { useGetTeachersTimetablesQuery } from 'services/timetableService'
 import { Box } from '@chakra-ui/react'
 import { isApiError } from 'utils/isApiError'
 import { useTypedSelector } from 'redux-store/hooks'
-import { selectUserId } from 'redux-store/reducers/user.slice'
+import { selectTeacherId } from 'redux-store/reducers/user.slice'
 
-export interface MainProps {}
+export interface MyTimetableProps {}
 
-export const Main: VFC<MainProps> = ({}) => {
-  const userId = useTypedSelector(selectUserId)
-  console.log('🚀 ~ userId', userId)
+export const MyTimetable: VFC<MyTimetableProps> = ({}) => {
+  const teacherId = useTypedSelector(selectTeacherId)
 
   const {
     data: timetables,
     isLoading,
     isError: isErrorResp,
     error,
-  } = useGetTeachersTimetablesQuery(userId)
+  } = useGetTeachersTimetablesQuery(teacherId)
 
   const isError = isErrorResp && isApiError(error)
 
