@@ -1,6 +1,5 @@
 import { forwardRef, useRef } from 'react'
 import {
-  Box,
   Flex,
   FormControl,
   FormLabel,
@@ -11,19 +10,22 @@ import {
   InputRightElement,
   useDisclosure,
   useMergeRefs,
-  Link,
   useColorModeValue,
   FormErrorMessage,
+  Button,
 } from '@chakra-ui/react'
 import { usePrimaryColor } from 'hooks/usePrimaryColor'
 import { HiEye, HiEyeOff } from 'react-icons/hi'
 
 export interface PasswordFieldProps extends InputProps {
   errorMessage?: string
+  label: string
+  forgotPasswordLabel: string
+  onForgotPassword: () => void
 }
 
 export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
-  ({ isInvalid, errorMessage, ...props }, ref) => {
+  ({ isInvalid, errorMessage, label, onForgotPassword, forgotPasswordLabel, ...props }, ref) => {
     const { isOpen, onToggle } = useDisclosure()
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -49,10 +51,17 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     return (
       <FormControl id="password" isInvalid={isInvalid}>
         <Flex justify="space-between">
-          <FormLabel>Пароль</FormLabel>
-          <Box as={Link} color={color} fontWeight="semibold" fontSize="sm">
-            Забыли пароль?
-          </Box>
+          <FormLabel>{label}</FormLabel>
+          <Button
+            color={color}
+            mb={2}
+            variant="link"
+            fontWeight="semibold"
+            fontSize="sm"
+            onClick={onForgotPassword}
+          >
+            {forgotPasswordLabel}
+          </Button>
         </Flex>
         <InputGroup>
           <Input

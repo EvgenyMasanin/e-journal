@@ -17,8 +17,6 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
 import { useLoginMutation } from 'services/authService'
-import { useTypedSelector } from 'redux-store/hooks'
-import { useEffect } from 'react'
 import { Logo } from 'components/layout/logo'
 
 const authFormSchema = yup.object().shape({
@@ -46,7 +44,6 @@ export const LoginForm = (props: HTMLChakraProps<'form'>) => {
     handleSubmit,
     register,
     formState: { errors },
-    setFocus,
     reset,
   } = useForm<FormInputs>({ resolver })
 
@@ -61,6 +58,10 @@ export const LoginForm = (props: HTMLChakraProps<'form'>) => {
       .catch((error) => {
         console.log('error ', error)
       })
+  }
+
+  const handleForgotPassword = () => {
+    console.log('forgot password')
   }
 
   return (
@@ -86,11 +87,14 @@ export const LoginForm = (props: HTMLChakraProps<'form'>) => {
               <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
             </FormControl>
             <PasswordField
+              label="Пароль"
+              forgotPasswordLabel="Забыли пароль?"
+              onForgotPassword={handleForgotPassword}
               {...register('password')}
               isInvalid={!!errors.password}
               errorMessage={errors.password?.message}
             />
-            <Button type="submit" colorScheme="teal" size="lg" fontSize="md">
+            <Button type="submit" colorScheme="teal" size="lg" fontSize="md" isLoading={isLoading}>
               Войти
             </Button>
           </Stack>
