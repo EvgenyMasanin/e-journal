@@ -1,6 +1,6 @@
 import { VFC } from 'react'
 import { Box, BoxProps, CloseButton, Flex, useColorModeValue } from '@chakra-ui/react'
-import { Logo } from '../logo'
+import { LinkLogo } from '../logo'
 import { NavItem } from '../nav-item'
 import { adminLinks, teacherLinks } from './link-items'
 import { useTypedSelector } from 'redux-store/hooks'
@@ -26,7 +26,7 @@ export const Sidebar: VFC<SidebarProps> = ({ onClose, ...rest }) => {
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Logo />
+        <LinkLogo />
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {links.map(({ icon, name, path }) => (
