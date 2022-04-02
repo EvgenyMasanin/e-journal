@@ -1,4 +1,4 @@
-import { MistakesTable } from 'components/mistakes-table'
+import { TimetablesMistakesPage } from 'pages/admins-pages/timetables-mistakes-page'
 import { VFC } from 'react'
 
 export interface AdminPageProps {}

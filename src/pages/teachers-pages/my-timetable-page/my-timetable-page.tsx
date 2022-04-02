@@ -8,7 +8,7 @@ import { selectTeacherId } from 'redux-store/reducers/user.slice'
 
 export interface MyTimetableProps {}
 
-export const MyTimetable: VFC<MyTimetableProps> = ({}) => {
+export const MyTimetablePage: VFC<MyTimetableProps> = ({}) => {
   const teacherId = useTypedSelector(selectTeacherId)
 
   const {

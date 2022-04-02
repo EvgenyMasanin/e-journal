@@ -4,8 +4,9 @@ import { useGetMistakesQuery } from 'services/mistakeService'
 
 export interface MistakesTableProps {}
 
-export const MistakesTable: VFC<MistakesTableProps> = ({}) => {
+export const TimetablesMistakesPage: VFC<MistakesTableProps> = ({}) => {
   const { data, isLoading } = useGetMistakesQuery({})
+  //FIXME: no id prop
   console.log(data)
 
   return !isLoading && <Table data={data.mistakesWithCountOfLessons} isLoading={isLoading} />

@@ -47,7 +47,7 @@ export interface TimetableInfoParams extends Record<string, string> {
   teacher_id: string
 }
 
-export const TimetableInfo: VFC<TimetableInfoProps> = ({}) => {
+export const TimetableInfoPage: VFC<TimetableInfoProps> = ({}) => {
   const [weekDay, setWeekDay] = useState<WeekDaysEN>()
   const [weekType, setWeekType] = useState<WeekType>()
   const [semester, setSemester] = useState<Semester>()

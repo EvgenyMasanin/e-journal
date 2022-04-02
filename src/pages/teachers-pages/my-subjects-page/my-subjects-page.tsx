@@ -22,7 +22,7 @@ const mapSubjects = (subjectWithAdditionData: SubjectWithAdditionData[]) =>
         : WeekTypeMap['up/down'],
   }))
 
-export const MySubjects: VFC<MySubjectsProps> = ({}) => {
+export const MySubjectsPage: VFC<MySubjectsProps> = ({}) => {
   const teacherId = useTypedSelector(selectTeacherId)
 
   const { data, isLoading } = useGetSubjectsQuery(teacherId)

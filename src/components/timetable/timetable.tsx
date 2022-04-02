@@ -36,7 +36,8 @@ export const Timetable: VFC<TimetableProps> = ({ week, isLoading }) => {
     <TimetableContext.Provider value={{ week: week, weekType: weekType, semester }}>
       <VStack h="full" overflow="auto">
         <TimetableHeading />
-        {isLoading ? <Loader /> : !isMd ? <TimetableCardsGrid /> : <TimetableCardSlider />}
+        {isLoading ? <Loader /> : <TimetableCardsGrid />}
+        {/* {isLoading ? <Loader /> : !isMd ? <TimetableCardsGrid /> : <TimetableCardSlider />} */}
       </VStack>
     </TimetableContext.Provider>
   )
