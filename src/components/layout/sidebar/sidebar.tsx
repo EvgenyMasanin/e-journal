@@ -21,6 +21,7 @@ export const Sidebar: VFC<SidebarProps> = ({ onClose, ...rest }) => {
       borderRight="1px"
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: '60' }}
+      overflow="auto"
       pos="fixed"
       h="full"
       {...rest}

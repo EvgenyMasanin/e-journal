@@ -6,7 +6,7 @@ import { Sidebar } from './sidebar'
 
 export interface LayoutProps {}
 
-export const Layout: FC<LayoutProps> = ({ children }) => {
+export const Layout: FC<LayoutProps> = ({}) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Box minH="100vh">
@@ -24,9 +24,8 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
-      <Box h="90%" ml={{ base: 0, md: 60 }} p="4">
+      <Box h="90%" ml={{ base: 0, md: 60 }} p="4" overflow="auto">
         <Outlet />
-        {/* {children} */}
       </Box>
     </Box>
   )
