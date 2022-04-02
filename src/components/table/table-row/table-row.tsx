@@ -1,23 +1,59 @@
-import { VFC } from 'react'
-import { Tr } from '@chakra-ui/react'
+import { createContext, memo, useContext, useState, VFC } from 'react'
+import { Flex, Td, Tr, Input } from '@chakra-ui/react'
 import { TableCell } from '../table-cell'
 import useTableContext from '../hooks/useTableContext'
+import { useRegisterContext } from '../hooks/useRegisterContext'
+import { ActionButtons } from '../action-buttons'
 
 export interface TimetableRowProps {
   data: unknown
+  id: number
   rowNumber?: number
 }
 
-export const TableRow: VFC<TimetableRowProps> = ({ data, rowNumber }) => {
-  const { printCounter, columnNames } = useTableContext()
+export const TableRowContext = createContext<{
+  isEdited: boolean
+}>(null)
+
+export const useTableRowContext = () => {
+  return useContext(TableRowContext)
+}
+
+export const TableRow: VFC<TimetableRowProps> = memo(({ data, id, rowNumber }) => {
+  const context = useTableContext()
+  const { printCounter, columnNames, editable } = context
+  const register = useRegisterContext()
+  const [isEdit, setIsEdit] = useState(false)
 
   return (
     <Tr>
       {printCounter && <TableCell value={rowNumber + 1} colName="№" />}
+      {isEdit && (
+        <Td display="none">
+          <Input value={id} {...register('id')} />
+        </Td>
+      )}
       {Object.entries(data).map(([key, value], i) => {
         const colName = columnNames.length !== 0 ? columnNames[i] : key
-        return <TableCell key={key} value={value} colName={colName} />
+        return (
+          <TableCell key={key} value={value} colName={colName} fieldName={key} isEdit={isEdit} />
+        )
       })}
+
+      {editable && (
+        <Td>
+          <Flex gap={2} justify="center">
+            <ActionButtons
+              isEdit={isEdit}
+              rowNumber={rowNumber}
+              setIsEdit={setIsEdit}
+              dataId={id}
+            />
+          </Flex>
+        </Td>
+      )}
     </Tr>
   )
-}
+})
+
+TableRow.displayName = 'TableRow'

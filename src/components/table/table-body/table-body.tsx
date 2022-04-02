@@ -1,11 +1,15 @@
-import { VFC } from 'react'
+import { memo, useEffect, VFC } from 'react'
 import { Tbody } from '@chakra-ui/react'
 import { TableRow } from '../table-row'
 import useTableContext from 'components/table/hooks/useTableContext'
 import { TableLoader } from '../table-loader'
 
-export const TableBody: VFC = () => {
+export const TableBody: VFC = memo(() => {
   const { data, isLoading, printIds } = useTableContext()
+
+  useEffect(() => {
+    console.log('body rerender')
+  })
 
   return (
     <Tbody>
@@ -13,9 +17,11 @@ export const TableBody: VFC = () => {
         <TableLoader />
       ) : (
         data.map(({ id, ...data }, i) => (
-          <TableRow key={id} rowNumber={i} data={printIds ? { id, ...data } : data} />
+          <TableRow key={id} rowNumber={i} id={id} data={printIds ? { id, ...data } : data} />
         ))
       )}
     </Tbody>
   )
-}
+})
+
+TableBody.displayName = 'TableBody'
