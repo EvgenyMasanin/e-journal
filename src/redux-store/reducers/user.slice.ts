@@ -75,3 +75,4 @@ export default userSlice
 export const selectUser = (state: RootState) => state.user.user
 export const selectUserId = (state: RootState) => selectUser(state)?.id
 export const selectUserRoles = (state: RootState) => selectUser(state)?.roles
+export const selectTeacherId = (state: RootState) => selectUser(state)?.teacher.id

@@ -1,10 +1,17 @@
 import { Layout } from 'components/layout'
 import { Loader } from 'components/loader'
 import { AdminPage } from 'pages/admins-pages/admin-page'
+import { GroupsPage } from 'pages/admins-pages/groups-page'
+import { RolesPage } from 'pages/admins-pages/roles-page'
+import { SubjectsPage } from 'pages/admins-pages/subjects-page'
+import { TeachersPage } from 'pages/admins-pages/teachers-page'
+import { TimetablesMistakesPage } from 'pages/admins-pages/timetables-mistakes-page'
+import { TimetablesPage } from 'pages/admins-pages/timetables-page'
+import { UsersPage } from 'pages/admins-pages/users-page'
 import { AuthPage } from 'pages/auth-page'
-import { MySubjects } from 'pages/teachers-pages/my-subjects'
-import { MyTimetable } from 'pages/teachers-pages/my-timetable'
-import { TimetableInfo } from 'pages/teachers-pages/timetable-info'
+import { MySubjectsPage } from 'pages/teachers-pages/my-subjects-page'
+import { MyTimetablePage } from 'pages/teachers-pages/my-timetable-page'
+import { TimetableInfoPage } from 'pages/teachers-pages/timetable-info-page'
 import { VFC } from 'react'
 import { Route, Routes, Outlet } from 'react-router-dom'
 import { useTypedSelector } from 'redux-store/hooks'
@@ -25,15 +32,23 @@ export const Router: VFC<RouterProps> = ({}) => {
           <Route path="*" element={<Loader />} />
         ) : isAdmin(userRoles) ? (
           <Route path={AdminPaths.admin} element={<Layout />}>
-            <Route path={AdminPaths.admin} element={<AdminPage />} />
-            <Route path="*" element={<AdminPage />} />
+            <Route index element={<AdminPage />} />
+            <Route path={AdminPaths.users} element={<UsersPage />} />
+            <Route path={AdminPaths.roles} element={<RolesPage />} />
+            <Route path={AdminPaths.teachers} element={<TeachersPage />} />
+            <Route path={AdminPaths.subjects} element={<SubjectsPage />} />
+            <Route path={AdminPaths.groups} element={<GroupsPage />} />
+            <Route path={AdminPaths.timetables} element={<TimetablesPage />} />
+            <Route path={AdminPaths.timetablesMistakes} element={<TimetablesMistakesPage />} />
           </Route>
         ) : (
           <Route path={TeacherPaths.teacher} element={<Layout />}>
-            <Route path={TeacherPaths.myTimetable} element={<MyTimetable />} />
-            <Route path={`${TeacherPaths.timetableInfo}/:teacher_id`} element={<TimetableInfo />} />
-            <Route path={TeacherPaths.mySubjects} element={<MySubjects />} />
-            <Route path="*" element={<MyTimetable />} />
+            <Route path={TeacherPaths.myTimetable} element={<MyTimetablePage />} />
+            <Route
+              path={`${TeacherPaths.timetableInfo}/:teacher_id`}
+              element={<TimetableInfoPage />}
+            />
+            <Route path={TeacherPaths.mySubjects} element={<MySubjectsPage />} />
           </Route>
         )}
       </Route>
