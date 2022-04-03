@@ -30,14 +30,12 @@ export const NavItem: FC<NavItemProps> = ({ icon, path, text, children, ...rest 
       <Flex
         align="center"
         p="4"
-        mx="4"
-        my="2"
         borderRadius="lg"
         role="group"
         cursor="pointer"
         fontSize="18"
-        {...(match && hoverEffect)}
         _hover={hoverEffect}
+        {...(match && hoverEffect)}
         {...rest}
       >
         {icon && <Icon mr="4" color={iconHoverColor} as={icon} />}

@@ -1,5 +1,5 @@
 import { VFC } from 'react'
-import { Box, BoxProps, CloseButton, Flex, useColorModeValue } from '@chakra-ui/react'
+import { Box, BoxProps, CloseButton, Flex, useColorModeValue, VStack } from '@chakra-ui/react'
 import { LinkLogo } from '../logo'
 import { NavItem } from '../nav-item'
 import { adminLinks, teacherLinks } from './link-items'
@@ -30,9 +30,11 @@ export const Sidebar: VFC<SidebarProps> = ({ onClose, ...rest }) => {
         <LinkLogo />
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {links.map(({ icon, name, path }) => (
-        <NavItem key={name} icon={icon} path={path} text={name} />
-      ))}
+      <Flex direction="column" gap={2} px={4} mb={2}>
+        {links.map(({ icon, name, path }) => (
+          <NavItem key={name} icon={icon} path={path} text={name} />
+        ))}
+      </Flex>
     </Box>
   )
 }
