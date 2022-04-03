@@ -3,40 +3,25 @@ import {
   Button,
   Center,
   chakra,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
   Heading,
   HTMLChakraProps,
-  Input,
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react'
-import { PasswordField } from './controls/password-field'
+import { PasswordField } from '../../form-components/controls/password-field'
 import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
-import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
 import { useLoginMutation } from 'services/authService'
 import { Logo } from 'components/layout/logo'
+import { InputField } from '../../form-components/controls/input-field'
+import { useAuthFormSchemaResolver } from '../schemes'
 
-const authFormSchema = yup.object().shape({
-  email: yup
-    .string()
-    .email('Введите корректный адрес электронной почты')
-    .required('Обязательное поле'),
-  password: yup
-    .string()
-    .min(1, 'Пароль должен содержать хотя бы 8 символов')
-    .required('Обязательное поле'),
-})
-
-export interface FormInputs {
+export interface LoginFormFields {
   email: string
   password: string
 }
 
 export const LoginForm = (props: HTMLChakraProps<'form'>) => {
-  const resolver = useYupValidationResolver(authFormSchema)
+  const resolver = useAuthFormSchemaResolver()
 
   const [login, { isLoading }] = useLoginMutation()
 
@@ -45,9 +30,9 @@ export const LoginForm = (props: HTMLChakraProps<'form'>) => {
     register,
     formState: { errors },
     reset,
-  } = useForm<FormInputs>({ resolver })
+  } = useForm<LoginFormFields>({ resolver })
 
-  const onSubmit = async (fields: FormInputs) => {
+  const onSubmit = async (fields: LoginFormFields) => {
     console.log('🚀 ~ onSubmit ~ fields', fields)
     login(fields)
       .unwrap()
@@ -81,11 +66,13 @@ export const LoginForm = (props: HTMLChakraProps<'form'>) => {
         </Heading>
         <chakra.form onSubmit={handleSubmit(onSubmit)} {...props}>
           <Stack spacing="6">
-            <FormControl id="email" isInvalid={!!errors.email}>
-              <FormLabel>Адрес электронной почты</FormLabel>
-              <Input id="email" autoComplete="email" {...register('email')} />
-              <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
-            </FormControl>
+            <InputField
+              label="Адрес электронной почты"
+              autoComplete="email"
+              {...register('email')}
+              isInvalid={!!errors.email}
+              errorMessage={errors.email?.message}
+            />
             <PasswordField
               label="Пароль"
               forgotPasswordLabel="Забыли пароль?"

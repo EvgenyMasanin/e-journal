@@ -1,70 +1,66 @@
-import { useCallback, useEffect, useRef, VFC } from 'react'
+import { useCallback, useRef, VFC } from 'react'
 import { Table } from 'components/table'
-import { Loader } from 'components/loader'
-import { useYupValidationResolver } from 'hooks/useYupValidationResolver'
+import { AddTeacherForm } from 'components/form/forms/add-teacher-form'
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
+import { useTeachersFormSchemaResolver } from 'components/form/forms/schemes'
 import {
   useDeleteTeacherMutation,
   useGetTeachersQuery,
   useUpdateTeacherMutation,
 } from 'services/teachersService'
 import { Teacher } from 'types'
-import * as yup from 'yup'
+import { Flex, Heading } from '@chakra-ui/react'
 
 export interface TeachersPageProps {}
 
-const teachersFormSchema = yup.object().shape({
-  name: yup.string().min(3).required('Обязательное поле'),
-  fullName: yup.string().required('Обязательное поле'),
-  position: yup.string().required('Обязательное поле'),
-  fullPosition: yup.string().required('Обязательное поле'),
-})
-
 export const TeachersPage: VFC<TeachersPageProps> = ({}) => {
   const { data, isLoading } = useGetTeachersQuery()
-  console.log('🚀 ~ data', data)
+
+  const [updateTeacher, { isLoading: isUpdateLoading }] = useUpdateTeacherMutation()
+  const [deleteTeacher, { isLoading: isDeleteLoading }] = useDeleteTeacherMutation()
 
   const columnNames = useRef(['Инициалы', 'Полное имя', 'Должность (сокр.)', 'Должность'])
 
-  const resolver = useYupValidationResolver(teachersFormSchema)
+  const resolver = useTeachersFormSchemaResolver()
 
   const form = useForm<Teacher>({ resolver })
 
-  const [updateTeacher, { isLoading: isUpdateLoading }] = useUpdateTeacherMutation()
-  const [deleteTeacher] = useDeleteTeacherMutation()
+  const onSubmit: SubmitHandler<Teacher> = useCallback(
+    (teacher) => {
+      const touchedFieldsCount = Object.keys(form.formState.touchedFields).length
 
-  const onSubmit: SubmitHandler<Teacher> = useCallback((teacher) => {
-    const touchedFieldsCount = Object.keys(form.formState.touchedFields).length
-    console.log('🚀  ~ formState.touchedFields', form.formState.touchedFields)
-    if (touchedFieldsCount) {
-      console.log('on submit -----', teacher)
-      updateTeacher(teacher)
-    }
-  }, [])
+      if (touchedFieldsCount) {
+        updateTeacher(teacher)
+      }
+    },
+    [form.formState.touchedFields, updateTeacher]
+  )
 
   const onInValid: SubmitErrorHandler<Teacher> = useCallback((e) => {
     console.log('on error', e)
   }, [])
 
   const onDelete = (dataId: number) => {
-    console.log('🚀 ~ onDelete ~ onDelete', dataId)
     deleteTeacher(dataId)
   }
 
-  useEffect(() => {
-    console.log('page rerender')
-  }, [isUpdateLoading])
-
   return (
-    <Table
-      data={data}
-      columnNames={columnNames.current}
-      isLoading={isLoading}
-      editable
-      form={form}
-      onValid={onSubmit}
-      onInValid={onInValid}
-      onRowDelete={onDelete}
-    />
+    <>
+      <Flex justify="space-between">
+        <Heading fontSize="2xl">Преподаватели</Heading>
+        <AddTeacherForm />
+      </Flex>
+      <Table
+        data={data}
+        columnNames={columnNames.current}
+        isLoading={isLoading}
+        editable
+        form={form}
+        onValid={onSubmit}
+        onInValid={onInValid}
+        onRowDelete={onDelete}
+        isUpdating={isUpdateLoading || isDeleteLoading}
+      />
+    </>
   )
 }

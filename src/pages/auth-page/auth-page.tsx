@@ -1,5 +1,5 @@
-import { Box, Center } from '@chakra-ui/react'
-import { LoginForm } from 'components/form'
+import { Center } from '@chakra-ui/react'
+import { LoginForm } from 'components/form/forms/login-form'
 import { VFC } from 'react'
 
 export interface AuthPageProps {}
