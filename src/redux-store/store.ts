@@ -6,6 +6,7 @@ import { teachersApi } from 'services/teachersService'
 import { authApi } from 'services/authService'
 import { mistakesApi } from 'services/mistakeService'
 import { subjectsApi } from 'services/subjectsService'
+import { usersApi } from 'services/usersService'
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -19,6 +20,7 @@ export const store = configureStore({
     timetableApi.middleware,
     mistakesApi.middleware,
     subjectsApi.middleware,
+    usersApi.middleware,
   ],
 })
 

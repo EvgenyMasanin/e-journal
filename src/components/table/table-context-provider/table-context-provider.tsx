@@ -7,7 +7,7 @@ export type TableContextProviderProps<T extends ObjectWithId, S extends string[]
   'form' | 'onValid' | 'onInValid'
 > & { children: ReactNode }
 
-export const TableContext = createContext<{
+interface ITableContext {
   data: Array<ObjectWithId>
   columnNames?: string[]
   printCounter?: boolean
@@ -15,7 +15,9 @@ export const TableContext = createContext<{
   isLoading?: boolean
   editable?: boolean
   renderCell?: (columnName: string, value: string | number) => ReactNode
-}>(null)
+}
+
+export const TableContext = createContext<ITableContext>(null)
 
 export const TableActionButtonsContext = createContext<{
   editingRow: number | null
@@ -35,7 +37,7 @@ export const TableContextProvider = <T extends ObjectWithId, S extends string[],
   onRowDelete = () => {},
 }: TableContextProviderProps<T, S, K>) => {
   const [editingRow, setEditingRow] = useState<number | null>(null)
-  const tableContextValue = useMemo(
+  const tableContextValue: ITableContext = useMemo(
     () => ({
       isLoading,
       data,

@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'redux-store/store'
 import { authApi } from 'services/authService'
-import { Tokens, User } from 'types/user.types'
+import { AppUser, Tokens } from 'types/user.types'
 
 export interface UserState {
-  user: User | null
+  user: AppUser | null
   isAuthorized: boolean
   tokens: Tokens & {
     isTokenExpired: boolean

@@ -5,9 +5,9 @@ export interface Tokens {
   refreshToken: string
 }
 
-export type Role = 'Admin' | 'Teacher'
+export type UserRole = 'Admin' | 'Teacher'
 
-export const isAdmin = (roles: Role[]) => roles?.includes('Admin')
+export const isAdmin = (roles: UserRole[]) => roles?.includes('Admin')
 
 export interface User {
   id: number
@@ -16,4 +16,12 @@ export interface User {
   roles: Role[]
 }
 
-export type UserWithTokens = Tokens & { user: User }
+export type AppUser = Omit<User, 'roles'> & { roles: UserRole[] }
+
+export type UserWithTokens = Tokens & { user: AppUser }
+
+export interface Role {
+  id: number
+  name: string
+  description: string
+}

@@ -2,7 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { Teacher } from 'types'
 import { baseQueryWithReauth } from './api-config'
 
-enum TeachersApiTags {
+export enum TeachersApiTags {
   teacher = 'Teacher',
 }
 

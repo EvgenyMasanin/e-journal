@@ -1,5 +1,6 @@
+import { usersApi } from 'services/usersService'
 import { subjectsApi } from 'services/subjectsService'
-import { mistakesApi } from './../../services/mistakeService'
+import { mistakesApi } from 'services/mistakeService'
 import { combineReducers } from '@reduxjs/toolkit'
 import { authApi } from 'services/authService'
 import { teachersApi } from 'services/teachersService'
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [mistakesApi.reducerPath]: mistakesApi.reducer,
   [subjectsApi.reducerPath]: subjectsApi.reducer,
+  [usersApi.reducerPath]: usersApi.reducer,
   [userSlice.name]: userSlice.reducer,
   timetableReducer,
 })
