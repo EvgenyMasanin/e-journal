@@ -35,7 +35,7 @@ export const Table = <T extends ObjectWithId, S extends string[], K>({
   ...props
 }: TableProps<T, S, K>) => {
   return (
-    <Box overflowX="auto" position="relative">
+    <Box overflowX="auto" position={isUpdating ? 'relative' : 'initial'}>
       {isUpdating && (
         <Flex
           backdropFilter="blur(10px) "
@@ -54,7 +54,7 @@ export const Table = <T extends ObjectWithId, S extends string[], K>({
       )}
 
       <FormWrapper editable={editable} useFormReturn={form} onValid={onValid} onInValid={onInValid}>
-        <TableUI variant="simple">
+        <TableUI variant="simple" fontWeight="bold">
           <TableContextProvider {...props} editable={editable}>
             <TableHead />
             <TableBody />
