@@ -1,15 +1,15 @@
-import React, { useCallback, useMemo } from 'react'
-import { useForm } from 'react-hook-form'
+import { useCallback } from 'react'
 import * as yup from 'yup'
 import { Assign, ObjectShape } from 'yup/lib/object'
 
 export const useYupValidationResolver = (
-  validationSchema: yup.ObjectSchema<Assign<ObjectShape, unknown>>
+  validationSchema: yup.ObjectSchema<Assign<ObjectShape, unknown>>,
+  mapper?: (data: any) => any
 ) =>
   useCallback(
     async (data) => {
       try {
-        const values = await validationSchema.validate(data, {
+        const values = await validationSchema.validate(mapper ? mapper(data) : data, {
           abortEarly: false,
         })
 
