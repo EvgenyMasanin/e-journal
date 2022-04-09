@@ -1,4 +1,3 @@
-import { Stack } from '@chakra-ui/react'
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
 // eslint-disable-next-line import/no-unresolved
 import { Path } from 'react-hook-form/dist/types/path'
@@ -12,7 +11,7 @@ export interface FormControlsProps<T> {
 
 export const FormControls = <T,>({ fields, register, errors }: FormControlsProps<T>) => {
   return (
-    <Stack spacing="6">
+    <>
       {fields.map((fieldName) => {
         const stringFieldName = String(fieldName)
 
@@ -29,6 +28,6 @@ export const FormControls = <T,>({ fields, register, errors }: FormControlsProps
           />
         )
       })}
-    </Stack>
+    </>
   )
 }
