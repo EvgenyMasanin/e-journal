@@ -1,6 +1,6 @@
 import { VFC } from 'react'
 import { Timetable } from 'components/timetable'
-import { useGetTeachersTimetablesQuery } from 'services/timetableService'
+import { useGetTimetablesByTeacherIdQuery } from 'services/timetableService'
 import { Box } from '@chakra-ui/react'
 import { isApiError } from 'utils/isApiError'
 import { useTypedSelector } from 'redux-store/hooks'
@@ -16,7 +16,8 @@ export const MyTimetablePage: VFC<MyTimetableProps> = ({}) => {
     isLoading,
     isError: isErrorResp,
     error,
-  } = useGetTeachersTimetablesQuery(teacherId)
+  } = useGetTimetablesByTeacherIdQuery(teacherId)
+  console.log('🚀 ~ timetables', timetables)
 
   const isError = isErrorResp && isApiError(error)
 

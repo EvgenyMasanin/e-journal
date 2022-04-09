@@ -3,7 +3,7 @@ import { Table } from 'components/table'
 import { useRef, VFC } from 'react'
 import { useTypedSelector } from 'redux-store/hooks'
 import { selectTeacherId } from 'redux-store/reducers/user.slice'
-import { useGetSubjectsQuery } from 'services/subjectsService'
+import { useGetSubjectsByTeacherIdQuery } from 'services/subjectsService'
 import { SemesterMap, SubjectWithAdditionData, WeekTypeMap } from 'types'
 
 export interface MySubjectsProps {}
@@ -25,7 +25,7 @@ const mapSubjects = (subjectWithAdditionData: SubjectWithAdditionData[]) =>
 export const MySubjectsPage: VFC<MySubjectsProps> = ({}) => {
   const teacherId = useTypedSelector(selectTeacherId)
 
-  const { data, isLoading } = useGetSubjectsQuery(teacherId)
+  const { data, isLoading } = useGetSubjectsByTeacherIdQuery(teacherId)
 
   const columnNames = useRef(['Название предмета', 'Группы', 'Семестры', 'Типы недели'])
 

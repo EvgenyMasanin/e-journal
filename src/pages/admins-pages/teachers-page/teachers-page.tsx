@@ -1,4 +1,5 @@
 import { useCallback, useRef, VFC } from 'react'
+import { TablePageContainer } from 'components/table-page-container'
 import { Table } from 'components/table'
 import { AddTeacherForm } from 'components/form/forms/add-teacher-form'
 import { SubmitErrorHandler, SubmitHandler, useForm } from 'react-hook-form'
@@ -9,7 +10,6 @@ import {
   useUpdateTeacherMutation,
 } from 'services/teachersService'
 import { Teacher } from 'types'
-import { Flex, Heading } from '@chakra-ui/react'
 
 export interface TeachersPageProps {}
 
@@ -27,13 +27,13 @@ export const TeachersPage: VFC<TeachersPageProps> = ({}) => {
 
   const onSubmit: SubmitHandler<Teacher> = useCallback(
     (teacher) => {
-      const touchedFieldsCount = Object.keys(form.formState.touchedFields).length
+      const dirtyFieldsCount = Object.keys(form.formState.dirtyFields).length
 
-      if (touchedFieldsCount) {
+      if (dirtyFieldsCount) {
         updateTeacher(teacher)
       }
     },
-    [form.formState.touchedFields, updateTeacher]
+    [form.formState.dirtyFields, updateTeacher]
   )
 
   const onInValid: SubmitErrorHandler<Teacher> = useCallback((e) => {
@@ -45,22 +45,22 @@ export const TeachersPage: VFC<TeachersPageProps> = ({}) => {
   }
 
   return (
-    <>
-      <Flex justify="space-between">
-        <Heading fontSize="2xl">Преподаватели</Heading>
-        <AddTeacherForm />
-      </Flex>
-      <Table
-        data={data}
-        columnNames={columnNames.current}
-        isLoading={isLoading}
-        editable
-        form={form}
-        onValid={onSubmit}
-        onInValid={onInValid}
-        onRowDelete={onDelete}
-        isUpdating={isUpdateLoading || isDeleteLoading}
-      />
-    </>
+    <TablePageContainer
+      headerText="Преподаватели"
+      FormComponent={<AddTeacherForm />}
+      TableComponent={
+        <Table
+          data={data}
+          columnNames={columnNames.current}
+          isLoading={isLoading}
+          editable
+          form={form}
+          onValid={onSubmit}
+          onInValid={onInValid}
+          onRowDelete={onDelete}
+          isUpdating={isUpdateLoading || isDeleteLoading}
+        />
+      }
+    />
   )
 }

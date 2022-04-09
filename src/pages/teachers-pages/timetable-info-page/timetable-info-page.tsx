@@ -4,7 +4,7 @@ import { Table } from 'components/table'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useDate } from 'hooks/useDate'
 import { usePrimaryColor } from 'hooks/usePrimaryColor'
-import { useGetTeachersTimetablesQuery } from 'services/timetableService'
+import { useGetTimetablesByTeacherIdQuery } from 'services/timetableService'
 import { weekTimetableFilter } from 'utils/week-timetable-filter'
 import getEnumKeyByEnumValue, {
   SubjectTypesMap,
@@ -62,7 +62,7 @@ export const TimetableInfoPage: VFC<TimetableInfoProps> = ({}) => {
     setSemester(searchParams.get('semester') as Semester)
   }, [searchParams])
 
-  const { data: week, isLoading, isError } = useGetTeachersTimetablesQuery(+params.teacher_id)
+  const { data: week, isLoading, isError } = useGetTimetablesByTeacherIdQuery(+params.teacher_id)
 
   const color = usePrimaryColor()
 
