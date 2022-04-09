@@ -1,6 +1,6 @@
 import { VFC } from 'react'
 import { ModalForm } from '../../form-components/modal-form'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Teacher } from 'types'
 import { useTeacherFormSchemaResolver } from '../schemes'
 
@@ -15,10 +15,12 @@ export const AddTeacherForm: VFC<AddTeacherFormProps> = ({}) => {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
   } = useForm<TeacherFormFields>({ resolver })
 
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<TeacherFormFields> = (data) => {
     console.log('submit', data)
+    reset()
   }
 
   const fields: Array<keyof TeacherFormFields> = ['name', 'fullName', 'fullPosition', 'position']
@@ -27,7 +29,9 @@ export const AddTeacherForm: VFC<AddTeacherFormProps> = ({}) => {
     <ModalForm
       openBtnTitle="Добавить преподавателя"
       headerTitle="Введите данные преподавателя"
-      handleSubmit={handleSubmit(onSubmit)}
+      reset={reset}
+      onValid={onSubmit}
+      handleSubmit={handleSubmit}
       fields={fields}
       register={register}
       errors={errors}
