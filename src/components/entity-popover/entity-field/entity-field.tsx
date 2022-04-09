@@ -13,7 +13,7 @@ export const EntityField: VFC<EntityFieldProps> = ({ entityFieldName, entityFiel
         {entityFieldName}:{' '}
       </Text>
       <Text as="span" fontSize="sm" fontWeight="normal">
-        {entityFieldValue}
+        {String(entityFieldValue)}
       </Text>
     </Text>
   )

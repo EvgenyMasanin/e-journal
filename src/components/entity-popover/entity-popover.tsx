@@ -8,24 +8,28 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
+  Text,
 } from '@chakra-ui/react'
 import { VFC } from 'react'
 import { HiEye } from 'react-icons/hi'
 import { EntityField } from './entity-field'
 
 export interface EntityPopoverProps {
+  triggerText: string
   header: string
   entityFieldsNames: string[]
   entityFieldsValues: Array<string | number>
 }
 
 export const EntityPopover: VFC<EntityPopoverProps> = ({
+  triggerText,
   header,
   entityFieldsNames,
   entityFieldsValues,
 }) => {
   return (
     <Popover placement="right">
+      <Text as="span">{`${triggerText} `}</Text>
       <PopoverTrigger>
         <IconButton size="sm" icon={<HiEye />} aria-label="Show teacher info" />
       </PopoverTrigger>
