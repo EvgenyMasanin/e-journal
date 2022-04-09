@@ -20,7 +20,7 @@ export const teachersApi = createApi({
               { type: TeachersApiTags.teacher, id: 'LIST' },
             ]
           : [{ type: TeachersApiTags.teacher, id: 'LIST' }],
-      transformResponse: (response: Teacher[], meta, arg) => {
+      transformResponse: (response: Teacher[]) => {
         const sortedData = [...(response || [])]?.sort((a, b) => {
           if (a.name > b.name) return 1
           if (a.name < b.name) return -1

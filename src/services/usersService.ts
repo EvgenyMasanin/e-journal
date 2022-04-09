@@ -1,4 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
+import { UserFormFields } from 'pages/admins-pages/users-page'
 import { User } from 'types/user.types'
 import { baseQueryWithReauth } from './api-config'
 
@@ -25,7 +26,7 @@ export const usersApi = createApi({
       query: (id) => `users/${id}`,
       providesTags: (result, error, id) => [{ type: UsersApiTags.user, id }],
     }),
-    updateUser: build.mutation<User, User>({
+    updateUser: build.mutation<User, UserFormFields>({
       query: (user) => ({
         url: `users/${user.id}`,
         method: 'PATCH',

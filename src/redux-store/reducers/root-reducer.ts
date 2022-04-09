@@ -7,6 +7,8 @@ import { teachersApi } from 'services/teachersService'
 import { timetableApi } from 'services/timetableService'
 import timetableReducer from './timetable.slice'
 import userSlice from './user.slice'
+import { rolesApi } from 'services/roleService'
+import { groupsApi } from 'services/group.api'
 
 export const rootReducer = combineReducers({
   [teachersApi.reducerPath]: teachersApi.reducer,
@@ -15,6 +17,8 @@ export const rootReducer = combineReducers({
   [mistakesApi.reducerPath]: mistakesApi.reducer,
   [subjectsApi.reducerPath]: subjectsApi.reducer,
   [usersApi.reducerPath]: usersApi.reducer,
+  [rolesApi.reducerPath]: rolesApi.reducer,
+  [groupsApi.reducerPath]: groupsApi.reducer,
   [userSlice.name]: userSlice.reducer,
   timetableReducer,
 })

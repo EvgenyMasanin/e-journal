@@ -1,3 +1,4 @@
+import { rolesApi } from './../services/roleService'
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore } from 'redux-persist'
 import { persistedReducer, serializableCheck } from './persist'
@@ -7,6 +8,7 @@ import { authApi } from 'services/authService'
 import { mistakesApi } from 'services/mistakeService'
 import { subjectsApi } from 'services/subjectsService'
 import { usersApi } from 'services/usersService'
+import { groupsApi } from 'services/group.api'
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -21,6 +23,8 @@ export const store = configureStore({
     mistakesApi.middleware,
     subjectsApi.middleware,
     usersApi.middleware,
+    rolesApi.middleware,
+    groupsApi.middleware,
   ],
 })
 

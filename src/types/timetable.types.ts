@@ -64,9 +64,9 @@ export enum SemesterMap {
 
 export interface Timetable {
   id: number
-  subjectId: number
+  teacherToSubjectId: number
   groupId: number
-  subGroupsCount: SubGroupNumber
+  // subGroupsCount: SubGroupNumber
   subGroupNum: SubGroupNumber
   weekDay: WeekDaysEN
   subjectType: SubjectTypes
