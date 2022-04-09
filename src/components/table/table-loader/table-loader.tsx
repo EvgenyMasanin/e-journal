@@ -6,10 +6,14 @@ import useTableContext from '../hooks/useTableContext'
 export interface TableLoaderProps {}
 
 export const TableLoader: VFC<TableLoaderProps> = ({}) => {
-  const { columnNames } = useTableContext()
+  const { columnNames, editable } = useTableContext()
+
+  const colSpan = columnNames.length
+  const extraColSpan = editable ? 2 : 0
+
   return (
     <Tr>
-      <Td colSpan={columnNames.length}>
+      <Td colSpan={colSpan + extraColSpan}>
         <Loader />
       </Td>
     </Tr>

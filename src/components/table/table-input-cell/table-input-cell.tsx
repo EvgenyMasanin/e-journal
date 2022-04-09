@@ -12,7 +12,7 @@ export const TableInputCell: VFC<TableInputCellProps> = ({ fieldName, value }) =
   const { errors } = useValidationErrors()
 
   return (
-    <FormControl id={fieldName} isInvalid={errors?.[fieldName]}>
+    <FormControl id={fieldName} isInvalid={errors?.[fieldName]} minW={100}>
       <Input {...register(fieldName)} defaultValue={value ?? ''} />
       <FormErrorMessage>{errors?.[fieldName]?.message}</FormErrorMessage>
     </FormControl>

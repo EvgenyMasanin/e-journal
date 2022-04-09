@@ -6,18 +6,29 @@ import useTableContext from '../hooks/useTableContext'
 export interface TimetableCellProps {
   colName: string
   fieldName?: string
-  value: string | number
+  value: string
+  rowData: unknown
   isEdit?: boolean
 }
 
-export const TableCell: VFC<TimetableCellProps> = ({ colName, fieldName, value, isEdit }) => {
-  const { renderCell } = useTableContext()
+export const TableCell: VFC<TimetableCellProps> = ({
+  colName,
+  fieldName,
+  value,
+  rowData,
+  isEdit,
+}) => {
+  const { renderCell, renderEditableCell } = useTableContext()
 
-  const Cell = renderCell?.(colName, value)
+  const Cell = renderCell?.(colName, value, rowData)
+
+  const EditableSell = isEdit ? renderEditableCell?.(colName, value, rowData) : null
 
   return (
     <Td verticalAlign={isEdit && 'top'}>
-      {isEdit ? <TableInputCell fieldName={fieldName} value={value} /> : Cell || value}
+      {isEdit
+        ? EditableSell ?? <TableInputCell fieldName={fieldName} value={value} />
+        : Cell ?? value}
     </Td>
   )
 }

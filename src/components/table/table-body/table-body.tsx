@@ -1,4 +1,4 @@
-import { memo, useEffect, VFC } from 'react'
+import { memo, VFC } from 'react'
 import { Tbody } from '@chakra-ui/react'
 import { TableRow } from '../table-row'
 import useTableContext from 'components/table/hooks/useTableContext'
@@ -6,10 +6,6 @@ import { TableLoader } from '../table-loader'
 
 export const TableBody: VFC = memo(() => {
   const { data, isLoading, printIds } = useTableContext()
-
-  useEffect(() => {
-    console.log('body rerender')
-  })
 
   return (
     <Tbody>
