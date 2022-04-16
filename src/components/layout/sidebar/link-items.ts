@@ -2,6 +2,7 @@ import { IconType } from 'react-icons'
 import {
   FaBook,
   FaCalendarAlt,
+  FaFileUpload,
   FaHome,
   FaIdCardAlt,
   FaUser,
@@ -25,6 +26,7 @@ export const adminLinks: Array<LinkItemProps> = [
   { name: 'Группы', icon: FaUsers, path: AdminPaths.groups },
   { name: 'Расписание', icon: FaCalendarAlt, path: AdminPaths.timetables },
   { name: 'Ошибки в расписании', icon: IoIosWarning, path: AdminPaths.timetablesMistakes },
+  { name: 'Загрузить расписание', icon: FaFileUpload, path: AdminPaths.uploadFiles },
 ]
 export const teacherLinks: Array<LinkItemProps> = [
   { name: 'Моё Расписание', icon: FaCalendarAlt, path: TeacherPaths.myTimetable },

@@ -12,6 +12,7 @@ export enum AdminPaths {
   timetables = 'timetables',
   roles = 'roles',
   timetablesMistakes = 'timetables-mistakes',
+  uploadFiles = 'upload-files',
 }
 
 export enum TeacherPaths {

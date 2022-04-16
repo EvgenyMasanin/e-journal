@@ -7,6 +7,7 @@ import { SubjectsPage } from 'pages/admins-pages/subjects-page'
 import { TeachersPage } from 'pages/admins-pages/teachers-page'
 import { TimetablesMistakesPage } from 'pages/admins-pages/timetables-mistakes-page'
 import { TimetablesPage } from 'pages/admins-pages/timetables-page'
+import { UploadFilesPage } from 'pages/admins-pages/upload-files-page'
 import { UsersPage } from 'pages/admins-pages/users-page'
 import { AuthPage } from 'pages/auth-page'
 import { MySubjectsPage } from 'pages/teachers-pages/my-subjects-page'
@@ -40,6 +41,7 @@ export const Router: VFC<RouterProps> = ({}) => {
             <Route path={AdminPaths.groups} element={<GroupsPage />} />
             <Route path={AdminPaths.timetables} element={<TimetablesPage />} />
             <Route path={AdminPaths.timetablesMistakes} element={<TimetablesMistakesPage />} />
+            <Route path={AdminPaths.uploadFiles} element={<UploadFilesPage />} />
           </Route>
         ) : (
           <Route path={TeacherPaths.teacher} element={<Layout />}>
