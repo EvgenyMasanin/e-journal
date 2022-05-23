@@ -1,15 +1,17 @@
-import { InputField, ModalForm } from 'components/form/form-components'
+import { InputField, ModalForm, PasswordField } from 'components/form/form-components'
 import { Option, SelectField } from 'components/form/form-components/controls/select-field'
 import { VFC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useGetRolesQuery } from 'services/roleService'
-import { useGetTeachersQuery } from 'services/teachersService'
+import { useGetRolesQuery } from 'api/role.api'
+import { useGetTeachersQuery } from 'api/teachers.api'
 import { Teacher } from 'types'
 import { Role } from 'types/user.types'
-import { useUserFormSchemaResolver } from '../schemes/user-form-schema'
+import { useAddUserFormSchemaResolver } from '../schemes/user-form-schema'
+import { useCreateUserMutation } from 'api/users.api'
 
 export interface UserFormFields {
   email: string
+  password: string
   teacherId: number
   rolesId: number[]
 }
@@ -30,21 +32,26 @@ const mapUserFormFieldsToUser = ({
   email,
   rolesId,
   teacherId,
+  password,
 }: {
   email: string
   teacherId: Option
   rolesId: Option[]
+  password: string
 }): UserFormFields => ({
   email,
+  password,
   rolesId: rolesId?.map((r) => +r.value),
   teacherId: teacherId ? +teacherId?.value : undefined,
 })
 
-export const AddUserForm: VFC = ({}) => {
-  const resolver = useUserFormSchemaResolver(mapUserFormFieldsToUser)
+export const AddUserForm: VFC = () => {
+  const resolver = useAddUserFormSchemaResolver(mapUserFormFieldsToUser)
 
   const { data: teachers } = useGetTeachersQuery()
   const { data: roles } = useGetRolesQuery()
+
+  const [createUser, { isLoading }] = useCreateUserMutation()
 
   const {
     control,
@@ -56,6 +63,7 @@ export const AddUserForm: VFC = ({}) => {
 
   const onSubmit: SubmitHandler<UserFormFields> = (data) => {
     console.log('submit', data)
+    createUser(data)
     reset()
   }
 
@@ -72,6 +80,13 @@ export const AddUserForm: VFC = ({}) => {
         {...register('email')}
         isInvalid={!!errors.email}
         errorMessage={errors.email?.message}
+      />
+      <PasswordField
+        autoComplete="new-password"
+        label="Пароль"
+        {...register('password')}
+        isInvalid={!!errors.password}
+        errorMessage={errors.password?.message}
       />
       <SelectField
         control={control}

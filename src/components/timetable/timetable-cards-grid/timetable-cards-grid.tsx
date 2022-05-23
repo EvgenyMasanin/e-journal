@@ -2,9 +2,7 @@ import { VFC } from 'react'
 import { SimpleGrid } from '@chakra-ui/react'
 import { TimetableCards } from '../timetable-cards/timetable-cards'
 
-export interface TimetableCardsGridProps {}
-
-export const TimetableCardsGrid: VFC<TimetableCardsGridProps> = ({}) => {
+export const TimetableCardsGrid: VFC = () => {
   return (
     <SimpleGrid
       columns={[1, null, null, 2, 3]}
@@ -12,7 +10,7 @@ export const TimetableCardsGrid: VFC<TimetableCardsGridProps> = ({}) => {
       px={10}
       py={5}
       w="full"
-      spacingX="80px"
+      spacingX="30px"
       spacingY={5}
       overflowY="auto"
     >

@@ -14,7 +14,7 @@ export interface SidebarProps extends BoxProps {
 export const Sidebar: VFC<SidebarProps> = ({ onClose, ...rest }) => {
   const roles = useTypedSelector(selectUserRoles)
 
-  const links = isAdmin(roles) ? adminLinks : teacherLinks
+  const links = isAdmin(roles) ? [...adminLinks, ...teacherLinks] : teacherLinks
 
   return (
     <Box

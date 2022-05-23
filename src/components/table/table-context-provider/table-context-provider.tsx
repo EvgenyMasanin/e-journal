@@ -14,7 +14,7 @@ export interface ITableContext {
   printIds?: boolean
   isLoading?: boolean
   editable?: boolean
-  renderCell?: (columnName: string, value: string | number, row: any) => ReactNode
+  renderCell?: (columnName: string, value: string, row: any) => ReactNode
   renderEditableCell?: (columnName: string, value: string, row: any) => ReactNode
 }
 
@@ -43,7 +43,7 @@ export const TableContextProvider = <T extends ObjectWithId, S extends string[],
     () => ({
       isLoading,
       data,
-      columnNames: columnNames || Object.keys(data[0]),
+      columnNames: columnNames || Object.keys(data[0] ?? {}),
       printCounter,
       printIds,
       editable,

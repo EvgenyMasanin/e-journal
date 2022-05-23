@@ -10,8 +10,10 @@ import {
 import { RootState } from 'redux-store/store'
 import { Tokens } from 'types/user.types'
 
+export const BASE_URL = 'http://localhost:7000/'
+
 export const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:7000/',
+  baseUrl: BASE_URL,
   prepareHeaders: (headers, { getState }) => {
     const { accessToken, isTokenExpired, refreshToken } = (getState() as RootState).user.tokens
 

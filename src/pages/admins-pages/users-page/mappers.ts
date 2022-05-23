@@ -6,7 +6,7 @@ export const mapUsers = (users: User[]): UserForTable[] => {
   return users.map(({ id, email, roles, teacher }) => ({
     id,
     email,
-    teacher: teacher.id,
+    teacher: teacher?.id,
     roles: roles.map((r) => r.id).join(),
   }))
 }

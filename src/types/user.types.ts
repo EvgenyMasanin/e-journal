@@ -5,14 +5,19 @@ export interface Tokens {
   refreshToken: string
 }
 
-export type UserRole = 'Admin' | 'Teacher'
+// export type UserRole = 'Admin' | 'Teacher'
+export interface UserRole {
+  id: number
+  name: string
+  description: string
+}
 
-export const isAdmin = (roles: UserRole[]) => roles?.includes('Admin')
+export const isAdmin = (roles: UserRole[]) => roles?.some((role) => role.name === 'Admin')
 
 export interface User {
   id: number
   email: string
-  teacher: Teacher
+  teacher?: Teacher
   roles: Role[]
 }
 

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from 'redux-store/store'
-import { authApi } from 'services/authService'
+import { authApi } from 'api/auth.api'
 import { AppUser, Tokens } from 'types/user.types'
 
 export interface UserState {
@@ -58,6 +58,12 @@ const userSlice = createSlice({
         state.tokens.accessToken = payload.accessToken
         state.tokens.refreshToken = payload.refreshToken
       })
+      .addMatcher(authApi.endpoints.signupAdmin.matchFulfilled, (state, { payload }) => {
+        state.isAuthorized = true
+        state.user = payload.user
+        state.tokens.accessToken = payload.accessToken
+        state.tokens.refreshToken = payload.refreshToken
+      })
       .addMatcher(authApi.endpoints.auth.matchFulfilled, (state, { payload }) => {
         state.isAuthorized = true
         state.user = payload.user
@@ -75,4 +81,4 @@ export default userSlice
 export const selectUser = (state: RootState) => state.user.user
 export const selectUserId = (state: RootState) => selectUser(state)?.id
 export const selectUserRoles = (state: RootState) => selectUser(state)?.roles
-export const selectTeacherId = (state: RootState) => selectUser(state)?.teacher.id
+export const selectTeacherId = (state: RootState) => selectUser(state)?.teacher?.id

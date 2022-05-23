@@ -15,9 +15,11 @@ export const LessonsList: VFC<LessonsListProps> = ({ weekTimetables }) => {
     <TimetableCardPlaceholder />
   ) : (
     <List h="full" overflow="hidden">
-      {weekTimetables.map(({ id, lessonNumber: number, subjectType, subject: { name } }) => (
-        <LessonItem key={id} subjectName={name} subjectType={subjectType} lessonNumber={number} />
-      ))}
+      {weekTimetables.map(
+        ({ id, lessonNumber: number, subjectType, subject: { name }, campus, auditorium }) => (
+          <LessonItem key={id} subjectName={name} subjectType={subjectType} lessonNumber={number} auditorium={`${auditorium}/${campus}`} />
+        )
+      )}
     </List>
   )
 }

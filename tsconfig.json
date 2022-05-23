@@ -10,7 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": false,
     "strictNullChecks": false,
     "module": "esnext",
     "moduleResolution": "node",
@@ -18,7 +18,7 @@
     "jsx": "react-jsx",
     "declaration": true,
     "experimentalDecorators": true,
-    "typeRoots": ["./@types", "./node_modules/@types"]
+    "typeRoots": ["./@types", "./node_modules/@types"]    
   },
-  "include": ["src"]
+  "include": ["src"],
 }

@@ -1,7 +1,7 @@
 import { ModalForm } from 'components/form/form-components'
 import { VFC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useCreateRoleMutation } from 'services/roleService'
+import { useCreateRoleMutation } from 'api/role.api'
 import { useRoleFormSchemaResolver } from '../schemes/role-form-schema'
 
 export interface RoleFormFields {

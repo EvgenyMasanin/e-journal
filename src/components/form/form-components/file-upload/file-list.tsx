@@ -11,9 +11,9 @@ export interface FileListProps {
 export const FileList: VFC<FileListProps> = ({ files, onFileDelete }) => {
   return (
     <List px={4} w="fit-content" maxH={150} overflowY="auto">
-      {files.map((file, index: number) => (
+      {files.map((file) => (
         <ListItem
-          key={index}
+          key={file.name}
           fontSize="lg"
           display="flex"
           justifyContent="space-between"
@@ -26,8 +26,10 @@ export const FileList: VFC<FileListProps> = ({ files, onFileDelete }) => {
           </Flex>
           <IconButton
             size="sm"
+            fontSize="xx-large"
             variant="ghost"
-            as={IoIosClose}
+            // as={IoIosClose}
+            icon={<IoIosClose />}
             aria-label="delete file"
             onClick={onFileDelete(file)}
           />

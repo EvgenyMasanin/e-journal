@@ -1,3 +1,4 @@
+import { refetchAction } from 'api/teacher-to-subject.api'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { Teacher } from 'types'
 import { baseQueryWithReauth } from './api-config'
@@ -40,6 +41,10 @@ export const teachersApi = createApi({
         body: teacher,
       }),
       invalidatesTags: [{ type: TeachersApiTags.teacher, id: 'LIST' }],
+      async onQueryStarted({}, { dispatch, queryFulfilled }) {
+        await queryFulfilled
+        dispatch(refetchAction)
+      },
     }),
     deleteTeacher: build.mutation<boolean, number>({
       query: (id) => ({
@@ -47,6 +52,10 @@ export const teachersApi = createApi({
         method: 'DELETE',
       }),
       invalidatesTags: [{ type: TeachersApiTags.teacher, id: 'LIST' }],
+      async onQueryStarted({}, { dispatch, queryFulfilled }) {
+        await queryFulfilled
+        dispatch(refetchAction)
+      },
     }),
   }),
 })

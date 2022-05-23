@@ -13,6 +13,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import { ColorModeSwitcher } from 'components/color-mode-switcher'
+import { LangModeSwitcher } from 'components/lang-mode-switcher'
 import { usePrimaryColor } from 'hooks/usePrimaryColor'
 import { VFC } from 'react'
 import { FaSignOutAlt } from 'react-icons/fa'
@@ -20,6 +21,7 @@ import { FiMenu } from 'react-icons/fi'
 import { useActions } from 'redux-store/hooks'
 import { LinkLogo } from '../logo'
 import { User } from '../user'
+import { DownloadFileWithTimetableButton } from 'components/download-file-with-timetable-button'
 
 export interface MobileNavProps extends FlexProps {
   onOpen: () => void
@@ -58,9 +60,12 @@ export const MobileNav: VFC<MobileNavProps> = ({ onOpen, ...rest }) => {
         <LinkLogo />
       </Box>
 
-      <HStack spacing={{ base: '0', md: '6' }}>
+      <DownloadFileWithTimetableButton />
+
+      <HStack spacing={{ base: '0', md: '6' }} justifyContent="space-between">
         <Flex alignItems={'center'} gap={2}>
-          <ColorModeSwitcher justifySelf="flex-end" />
+          <ColorModeSwitcher />
+          <LangModeSwitcher />
           <Menu>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
               <User />

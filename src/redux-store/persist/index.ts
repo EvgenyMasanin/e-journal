@@ -3,9 +3,9 @@ import createFilter from 'redux-persist-transform-filter'
 import persistReducer from 'redux-persist/es/persistReducer'
 import userSlice from 'redux-store/reducers/user.slice'
 import { rootReducer, RootReducerState } from 'redux-store/reducers/root-reducer'
-import { authApi } from 'services/authService'
-import { teachersApi } from 'services/teachersService'
-import { timetableApi } from 'services/timetableService'
+import { authApi } from 'api/auth.api'
+import { teachersApi } from 'api/teachers.api'
+import { timetableApi } from 'api/timetable.api'
 import storage from 'redux-persist/lib/storage'
 
 export const serializableCheck = {

@@ -41,7 +41,7 @@ export const TableRow: VFC<TimetableRowProps> = memo(({ data, id, rowNumber }) =
           <TableCell
             key={key}
             rowData={{ ...data, id }}
-            value={String(value)}
+            value={String(value ?? '')}
             colName={colName}
             fieldName={key}
             isEdit={isEdit}

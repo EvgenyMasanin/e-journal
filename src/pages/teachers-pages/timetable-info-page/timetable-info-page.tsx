@@ -4,7 +4,7 @@ import { Table } from 'components/table'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useDate } from 'hooks/useDate'
 import { usePrimaryColor } from 'hooks/usePrimaryColor'
-import { useGetTimetablesByTeacherIdQuery } from 'services/timetableService'
+import { useGetTimetablesByTeacherIdQuery } from 'api/timetable.api'
 import { weekTimetableFilter } from 'utils/week-timetable-filter'
 import getEnumKeyByEnumValue, {
   SubjectTypesMap,

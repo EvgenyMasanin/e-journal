@@ -16,6 +16,7 @@ import { ColorModeSwitcher } from 'components/color-mode-switcher'
 import { Link, useLocation } from 'react-router-dom'
 import { useHoverColor } from 'hooks/useHoverColor'
 import { useActions } from 'redux-store/hooks'
+import { LangModeSwitcher } from 'components/lang-mode-switcher'
 
 const Header: VFC = () => {
   const color = useColorModeValue('black', 'teal.200')
@@ -52,6 +53,7 @@ const Header: VFC = () => {
       <HStack spacing="3">
         <Center>
           <ColorModeSwitcher justifySelf="flex-end" />
+          <LangModeSwitcher />
         </Center>
         {!isAuthPAge && (
           <Center w="100px">

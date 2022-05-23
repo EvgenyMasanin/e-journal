@@ -22,13 +22,14 @@ export const useFileUploadForm = () => {
     getValues,
     setError,
     clearErrors,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
+    watch,
+    reset,
   } = useForm<FileUploadFormFields>({ resolver: useFileUploadSchemaResolver() })
 
   const handleDrop: HandleDrop = useCallback(
     (field) => (event) => {
       const files = event.dataTransfer.files
-
       setValue(field, files)
     },
     [setValue]
@@ -94,12 +95,26 @@ export const useFileUploadForm = () => {
     () => ({
       register,
       handleSubmit,
+      isSubmitSuccessful,
       errors,
       handleDrop,
       fileWithPayloadValidators,
       filesWithTimetablesValidators,
       deleteFile,
+      reset,
+      watch,
     }),
-    [errors, fileWithPayloadValidators, filesWithTimetablesValidators, deleteFile]
+    [
+      errors,
+      fileWithPayloadValidators,
+      filesWithTimetablesValidators,
+      deleteFile,
+      isSubmitSuccessful,
+      watch,
+      handleDrop,
+      handleSubmit,
+      register,
+      reset,
+    ]
   )
 }

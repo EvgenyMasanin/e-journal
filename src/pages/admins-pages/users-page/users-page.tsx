@@ -2,23 +2,19 @@ import { useCallback, useRef, VFC } from 'react'
 import { TablePageContainer } from 'components/table-page-container'
 import { Table } from 'components/table'
 import { AddUserForm } from 'components/form/forms/add-user-form'
-import { useUserFormSchemaResolver } from 'components/form/forms/schemes'
+import { useAddUserFormSchemaResolver, useUserFormSchemaResolver } from 'components/form/forms/schemes'
 import { useTableForm } from 'hooks/useTableForm'
 import { SubmitHandler } from 'react-hook-form'
-import {
-  useGetUsersQuery,
-  useUpdateUserMutation,
-  useDeleteUserMutation,
-} from 'services/usersService'
-import { useGetRolesQuery } from 'services/roleService'
-import { useGetTeachersQuery } from 'services/teachersService'
+import { useGetUsersQuery, useUpdateUserMutation, useDeleteUserMutation } from 'api/users.api'
+import { useGetRolesQuery } from 'api/role.api'
+import { useGetTeachersQuery } from 'api/teachers.api'
 import { mapUserFormFieldsToUser, mapUsers } from './mappers'
 import { getRenderCell, getRenderEditableCell } from './render-cells'
 
 export interface UserForTable {
   id: number
   email: string
-  teacher: number
+  teacher?: number
   roles: string
 }
 
@@ -42,7 +38,7 @@ export const UsersPage: VFC = ({}) => {
   const handleSubmit: SubmitHandler<UserFormFields> = useCallback(
     (user) => {
       console.log('🚀 ~ submit', user)
-      // updateUser(user)
+      updateUser(user)
     },
     [updateUser]
   )
@@ -74,7 +70,9 @@ export const UsersPage: VFC = ({}) => {
           editable
           form={form}
           onValid={onSubmit}
-          onInValid={console.log}
+          onInValid={(data) => {
+            console.log('🚀 ~ data', data)
+          }}
           onRowDelete={onDelete}
           isUpdating={isUpdating || isDeleting}
         />

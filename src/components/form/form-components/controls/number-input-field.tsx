@@ -15,14 +15,17 @@ export interface NumberInputFieldProps extends NumberInputFieldUIProps {
   errorMessage?: string
   label?: string
   isInvalid: boolean
+  onlyPositive?: boolean
 }
 
 export const NumberInputField = forwardRef<HTMLInputElement, NumberInputFieldProps>(
-  ({ isInvalid, label, errorMessage, ...props }, ref) => {
+  ({ isInvalid, label, errorMessage, max, min, onlyPositive, ...props }, ref) => {
+    const minNumber = min ?? (onlyPositive ? 0 : undefined)
+
     return (
       <FormControl isInvalid={isInvalid}>
         {label && <FormLabel>{label}</FormLabel>}
-        <NumberInput allowMouseWheel>
+        <NumberInput allowMouseWheel max={max as number} min={minNumber as number}>
           <NumberInputFieldUI ref={ref} {...props} />
           <NumberInputStepper>
             <NumberIncrementStepper />

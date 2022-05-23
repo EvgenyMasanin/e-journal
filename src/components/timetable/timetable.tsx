@@ -1,6 +1,5 @@
 import { createContext, VFC } from 'react'
-import { useBreakpointValue, VStack } from '@chakra-ui/react'
-import { TimetableCardSlider } from 'components/timetable/timetable-card-slider'
+import { VStack } from '@chakra-ui/react'
 import { TimetableCardsGrid } from './timetable-cards-grid'
 import { Semester, Week, WeekType } from 'types'
 import { useTypedSelector } from 'redux-store/hooks'
@@ -25,8 +24,6 @@ export const TimetableContext = createContext<ITimetableContext>({
 })
 
 export const Timetable: VFC<TimetableProps> = ({ week, isLoading }) => {
-  const isMd = useBreakpointValue({ base: true, md: false })
-
   const { selectedSemester: semester, selectedWeekType: weekType } = useTypedSelector((state) => ({
     selectedWeekType: state.timetableReducer.selectedWeekType,
     selectedSemester: state.timetableReducer.selectedSemester,

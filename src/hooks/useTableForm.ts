@@ -15,13 +15,14 @@ export const useTableForm = <T>({
   handleInValid = () => undefined,
 }: UseTableFormProps<T>) => {
   const form = useForm<T>({ resolver })
+  // const form = useForm<T>()
 
   const onSubmit: SubmitHandler<T> = useCallback(
     (data) => {
-      console.log('🚀 ~ data', data)
       const touchedFieldsCount = Object.keys(form.formState.dirtyFields).length
 
       if (touchedFieldsCount) {
+        console.log('🚀 ~ submit', data)
         handleSubmit(data)
       }
     },
@@ -29,7 +30,10 @@ export const useTableForm = <T>({
   )
 
   const onInValid: SubmitErrorHandler<T> = useCallback(
-    (data) => handleInValid(data),
+    (data) => {
+      console.log('🚀 ~ invalid', data)
+      handleInValid(data)
+    },
     [handleInValid]
   )
 

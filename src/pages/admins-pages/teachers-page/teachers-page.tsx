@@ -8,7 +8,7 @@ import {
   useDeleteTeacherMutation,
   useGetTeachersQuery,
   useUpdateTeacherMutation,
-} from 'services/teachersService'
+} from 'api/teachers.api'
 import { Teacher } from 'types'
 
 export interface TeachersPageProps {}

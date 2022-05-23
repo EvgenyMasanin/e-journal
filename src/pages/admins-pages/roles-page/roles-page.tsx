@@ -9,7 +9,7 @@ import {
   useDeleteRoleMutation,
   useGetRolesQuery,
   useUpdateRoleMutation,
-} from 'services/roleService'
+} from 'api/role.api'
 import { Role } from 'types/user.types'
 
 export interface RolesPageProps {}

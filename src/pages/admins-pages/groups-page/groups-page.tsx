@@ -9,7 +9,7 @@ import {
   useDeleteGroupMutation,
   useGetGroupsQuery,
   useUpdateGroupMutation,
-} from 'services/group.api'
+} from 'api/group.api'
 import { Group } from 'types'
 import { getRenderCell } from './render-cells'
 

@@ -21,8 +21,9 @@ export const RadioCard: FC = ({ children, ...props }) => {
         _focus={{
           boxShadow: 'outline',
         }}
-        w={10}
-        h={10}
+        p={3}
+        maxH={10}
+        minW="fit-content"
       >
         {children}
       </Center>

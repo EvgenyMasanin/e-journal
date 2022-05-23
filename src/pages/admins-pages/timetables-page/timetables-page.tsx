@@ -1,21 +1,29 @@
-import { NumberInputField } from 'components/form/form-components/controls/number-input-field'
 import { useTimetableSchemaResolver } from 'components/form/forms/schemes/timetable-form-schema'
 import { Table } from 'components/table'
 import { TablePageContainer } from 'components/table-page-container'
 import { useTableForm } from 'hooks/useTableForm'
 import { useCallback, useRef, VFC } from 'react'
 import { SubmitHandler } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
+import { useGetGroupsQuery } from 'api/group.api'
+import { useGetTeacherToSubjectsQuery } from 'api/teacher-to-subject.api'
 import {
   useDeleteTimetableMutation,
   useGetTimetablesQuery,
   useUpdateTimetableMutation,
-} from 'services/timetableService'
+} from 'api/timetable.api'
 import { Timetable } from 'types'
+import { getRenderCell, getRenderInputCell } from './render-cells'
 
 export interface TimetablesPageProps {}
 
 export const TimetablesPage: VFC<TimetablesPageProps> = ({}) => {
-  const { data, isLoading, isError } = useGetTimetablesQuery()
+  const { data: timetables, isLoading: isTimetablesLoading, isError } = useGetTimetablesQuery()
+
+  const { data: teacherToSubjects, isLoading: isTeacherToSubjectsLoading } =
+    useGetTeacherToSubjectsQuery()
+
+  const { data: groups, isLoading: isGroupsLoading } = useGetGroupsQuery()
 
   const [updateTimetable, { isLoading: isUpdating }] = useUpdateTimetableMutation()
   const [deleteTimetable, { isLoading: isDeleting }] = useDeleteTimetableMutation()
@@ -48,50 +56,40 @@ export const TimetablesPage: VFC<TimetablesPageProps> = ({}) => {
     'корпус',
   ])
 
-  const mapper = (data: Timetable): Timetable => ({
-    ...data,
-    hoursPerWeek: data.hoursPerWeek || undefined,
-  })
+  const mapper = (data: Timetable): Timetable => {
+    console.log('🚀 ~ mapper ~ data', data)
+    return {
+      ...data,
+      hoursPerWeek: data.hoursPerWeek || undefined,
+    }
+  }
 
-  const { form, onDelete, onSubmit } = useTableForm({
+  const { form, onDelete, onSubmit, onInValid } = useTableForm({
     resolver: useTimetableSchemaResolver(mapper),
     handleSubmit,
     handleDelete,
   })
 
-  const {
-    register,
-    formState: { errors },
-  } = form
-
-  const renderEditableCell = (columnName: string, value: string, row: Timetable) => {
-    if (columnName === 'часы в неделю')
-      return (
-        <NumberInputField
-          minW={78}
-          defaultValue={0}
-          {...register('hoursPerWeek')}
-          isInvalid={!!errors.hoursPerWeek}
-          errorMessage={errors.hoursPerWeek?.message}
-        />
-      )
-  }
+  const { t } = useTranslation()
 
   return (
     <TablePageContainer
-      headerText="Расписания"
+      headerText={t('timetable')}
       FormComponent={null}
       TableComponent={
         <Table
-          data={data}
-          isLoading={isLoading}
+          data={timetables}
+          isLoading={isTimetablesLoading || isTeacherToSubjectsLoading || isGroupsLoading}
+          isUpdating={isUpdating || isDeleting}
           size="sm"
           columnNames={columnNames.current}
           editable
           form={form}
           onValid={onSubmit}
+          onInValid={onInValid}
           onRowDelete={onDelete}
-          renderEditableCell={renderEditableCell}
+          renderCell={getRenderCell({ teacherToSubjects, groups })}
+          renderEditableCell={getRenderInputCell({ groups, teacherToSubjects, form })}
         />
       }
     />

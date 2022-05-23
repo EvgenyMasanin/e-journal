@@ -2,7 +2,7 @@ import { InputField, ModalForm } from 'components/form/form-components'
 import { RadioField } from 'components/form/form-components/controls/radio-field/radio-field'
 import { VFC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useCreateGroupMutation } from 'services/group.api'
+import { useCreateGroupMutation } from 'api/group.api'
 import { Group } from 'types'
 import { useGroupSchemaResolver } from '../schemes/group-form-schema'
 
@@ -18,6 +18,7 @@ export const AddGroupForm: VFC = ({}) => {
     handleSubmit,
     register,
     formState: { errors },
+    setValue,
     reset,
   } = useForm<GroupFormFields>({ resolver })
 
@@ -47,6 +48,7 @@ export const AddGroupForm: VFC = ({}) => {
         control={control}
         name="subGroupsCount"
         options={['1', '2']}
+        setDefault={() => setValue('subGroupsCount', '1')}
       />
     </ModalForm>
   )

@@ -7,20 +7,22 @@ import {
   HTMLChakraProps,
   Stack,
   useColorModeValue,
+  useToast,
 } from '@chakra-ui/react'
 import { PasswordField } from '../../form-components/controls/password-field'
 import { useForm } from 'react-hook-form'
-import { useLoginMutation } from 'services/authService'
+import { useLoginMutation } from 'api/auth.api'
 import { Logo } from 'components/layout/logo'
 import { InputField } from '../../form-components/controls/input-field'
 import { useAuthFormSchemaResolver } from '../schemes'
+import { VFC } from 'react'
 
 export interface LoginFormFields {
   email: string
   password: string
 }
 
-export const LoginForm = (props: HTMLChakraProps<'form'>) => {
+export const LoginForm: VFC<HTMLChakraProps<'form'>> = (props) => {
   const resolver = useAuthFormSchemaResolver()
 
   const [login, { isLoading }] = useLoginMutation()
@@ -32,17 +34,21 @@ export const LoginForm = (props: HTMLChakraProps<'form'>) => {
     reset,
   } = useForm<LoginFormFields>({ resolver })
 
+  const toast = useToast()
+
   const onSubmit = async (fields: LoginFormFields) => {
-    console.log('🚀 ~ onSubmit ~ fields', fields)
-    login(fields)
-      .unwrap()
-      .then((data) => {
-        console.log('logged in ', data)
-        reset()
+    try {
+      await login(fields).unwrap()
+      reset()
+    } catch (error) {
+      console.log('🚀 ~ onSubmit ~ error', error)
+      toast({
+        title: 'Неверный логин или пароль',
+        status: 'error',
+        variant: 'subtle',
+        isClosable: true,
       })
-      .catch((error) => {
-        console.log('error ', error)
-      })
+    }
   }
 
   const handleForgotPassword = () => {

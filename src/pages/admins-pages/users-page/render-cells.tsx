@@ -19,10 +19,11 @@ export const getRenderCell =
     const teacherFieldsNames = useRef(['Инициалы', 'Полное имя', 'Должность (сокр.)', 'Должность'])
     const roleFieldsNames = useRef(['Название роли', 'Описание'])
 
-    const user = users?.find((user) => user.teacher.id === rowData.teacher)
+    const user = users?.find((user) => user.teacher?.id === rowData.teacher)
 
     if (!user) return
     if (colName === 'преподаватель') {
+      if (!user.teacher) return null
       const { id, ...teacher } = user.teacher
       return (
         <EntityPopover

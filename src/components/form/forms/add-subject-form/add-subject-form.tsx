@@ -1,7 +1,7 @@
 import { ModalForm } from 'components/form/form-components'
 import { VFC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useCreateSubjectMutation } from 'services/subjectsService'
+import { useCreateSubjectMutation } from 'api/subjects.api'
 import { Subject } from 'types'
 import { useSubjectSchemaResolver } from '../schemes/subject-form-schema'
 

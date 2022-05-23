@@ -8,7 +8,7 @@ import {
   useDeleteSubjectMutation,
   useUpdateSubjectMutation,
   useGetSubjectsQuery,
-} from 'services/subjectsService'
+} from 'api/subjects.api'
 import { Subject } from 'types'
 
 export const SubjectsPage: VFC = () => {

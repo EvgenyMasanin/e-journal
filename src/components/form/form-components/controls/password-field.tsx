@@ -20,8 +20,8 @@ import { HiEye, HiEyeOff } from 'react-icons/hi'
 export interface PasswordFieldProps extends InputProps {
   errorMessage?: string
   label: string
-  forgotPasswordLabel: string
-  onForgotPassword: () => void
+  forgotPasswordLabel?: string
+  onForgotPassword?: () => void
 }
 
 export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
@@ -52,19 +52,22 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
       <FormControl id="password" isInvalid={isInvalid}>
         <Flex justify="space-between">
           <FormLabel>{label}</FormLabel>
-          <Button
-            color={color}
-            mb={2}
-            variant="link"
-            fontWeight="semibold"
-            fontSize="sm"
-            onClick={onForgotPassword}
-          >
-            {forgotPasswordLabel}
-          </Button>
+          {forgotPasswordLabel && (
+            <Button
+              color={color}
+              mb={2}
+              variant="link"
+              fontWeight="semibold"
+              fontSize="sm"
+              onClick={onForgotPassword}
+            >
+              {forgotPasswordLabel}
+            </Button>
+          )}
         </Flex>
         <InputGroup>
           <Input
+            placeholder={label}
             ref={mergeRef}
             id="password"
             type={isOpen ? 'text' : 'password'}

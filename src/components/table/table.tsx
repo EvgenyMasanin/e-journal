@@ -23,7 +23,7 @@ export interface TableProps<T extends ObjectWithId, S extends string[], K> {
   onValid?: SubmitHandler<K>
   onInValid?: SubmitErrorHandler<K>
   onRowDelete?: (id: number) => void
-  renderCell?: (columnName: string, value: string | number, row: T) => ReactNode
+  renderCell?: (columnName: string, value: string, row: T) => ReactNode
   renderEditableCell?: (columnName: string, value: string, row: T) => ReactNode
 }
 

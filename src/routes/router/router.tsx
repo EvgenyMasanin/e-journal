@@ -1,3 +1,4 @@
+import { useIsAdminExistQuery } from 'api/auth.api'
 import { Layout } from 'components/layout'
 import { Loader } from 'components/loader'
 import { AdminPage } from 'pages/admins-pages/admin-page'
@@ -26,6 +27,8 @@ export const Router: VFC<RouterProps> = ({}) => {
   const userRoles = useTypedSelector(selectUserRoles)
   const user = useTypedSelector(selectUser)
 
+  const { data, isLoading } = useIsAdminExistQuery()
+
   return (
     <Routes>
       <Route path={Paths.main} element={<Outlet />}>
@@ -42,6 +45,12 @@ export const Router: VFC<RouterProps> = ({}) => {
             <Route path={AdminPaths.timetables} element={<TimetablesPage />} />
             <Route path={AdminPaths.timetablesMistakes} element={<TimetablesMistakesPage />} />
             <Route path={AdminPaths.uploadFiles} element={<UploadFilesPage />} />
+            <Route path={TeacherPaths.myTimetable} element={<MyTimetablePage />} />
+            <Route
+              path={`${TeacherPaths.timetableInfo}/:teacher_id`}
+              element={<TimetableInfoPage />}
+            />
+            <Route path={TeacherPaths.mySubjects} element={<MySubjectsPage />} />
           </Route>
         ) : (
           <Route path={TeacherPaths.teacher} element={<Layout />}>
@@ -55,6 +64,10 @@ export const Router: VFC<RouterProps> = ({}) => {
         )}
       </Route>
       <Route path={Paths.auth} element={<AuthPage />} />
+
+      {!data?.isAdminExist && !isLoading && (
+        <Route path={Paths.signupAdmin} element={<AuthPage signup />} />
+      )}
       <Route path="*" element={<div>404 Эта страница не существует</div>} />
     </Routes>
   )

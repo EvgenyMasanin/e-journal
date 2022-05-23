@@ -5,7 +5,7 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 type ColorModeSwitcherProps = Omit<IconButtonProps, 'aria-label'>
 
 const ColorModeSwitcher: FC<ColorModeSwitcherProps> = (props) => {
-  const { toggleColorMode } = useColorMode()
+  const { toggleColorMode, } = useColorMode()
   const text = useColorModeValue('dark', 'light')
   const SwitchIcon = useColorModeValue(FaMoon, FaSun)
 

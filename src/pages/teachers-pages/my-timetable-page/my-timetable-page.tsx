@@ -1,6 +1,6 @@
 import { VFC } from 'react'
 import { Timetable } from 'components/timetable'
-import { useGetTimetablesByTeacherIdQuery } from 'services/timetableService'
+import { useGetTimetablesByTeacherIdQuery } from 'api/timetable.api'
 import { Box } from '@chakra-ui/react'
 import { isApiError } from 'utils/isApiError'
 import { useTypedSelector } from 'redux-store/hooks'

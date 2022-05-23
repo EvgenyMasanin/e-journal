@@ -1,6 +1,6 @@
 import { Table } from 'components/table'
 import { VFC } from 'react'
-import { useGetMistakesQuery } from 'services/mistakeService'
+import { useGetMistakesQuery } from 'api/mistake.api'
 
 export interface MistakesTableProps {}
 
