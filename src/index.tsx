@@ -17,7 +17,7 @@ ReactDOM.render(
   <Suspense fallback={<Loader />}>
     <Provider store={store}>
       <PersistProvider loading={null} persistor={persistor}>
-        <BrowserRouter>
+        <BrowserRouter basename="/e-journal">
           <ChakraProvider>
             <App />
           </ChakraProvider>

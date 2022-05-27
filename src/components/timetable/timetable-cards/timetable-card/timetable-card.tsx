@@ -13,11 +13,11 @@ import { Link } from 'react-router-dom'
 import { usePrimaryColor } from 'hooks/usePrimaryColor'
 import useTimetableContext from 'components/timetable/hooks/useTimetableContest'
 import { weekTimetableFilter } from 'utils/week-timetable-filter'
-import { WeekDaysMap, WeekDaysRU, WeekTimetable } from 'types'
+import { isAdmin, WeekDaysMap, WeekDaysRU, WeekTimetable } from 'types'
 import s from './timetable-card.module.css'
 import { useTypedSelector } from 'redux-store/hooks'
-import { selectTeacherId } from 'redux-store/reducers/user.slice'
-import { TeacherPaths } from 'routes'
+import { selectTeacherId, selectUserRoles } from 'redux-store/reducers/user.slice'
+import { AdminPaths, TeacherPaths } from 'routes'
 
 export interface TimetableCardProps {
   weekTimetables: WeekTimetable[]
@@ -44,6 +44,8 @@ export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(
 
     const isToday = today === weekDay
 
+    const userRoles = useTypedSelector(selectUserRoles)
+
     return (
       <LinkBox ref={isToday ? ref : null} className={s.linkBox}>
         <Card
@@ -61,7 +63,11 @@ export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(
           <Stack textAlign="center" h="full">
             <LinkOverlay
               as={Link}
-              to={`${TeacherPaths.teacher}/${TeacherPaths.timetableInfo}/${teacherId}?week_day=${WeekDaysMap[weekDay]}&week_type=${weekType}&semester=${semester}`}
+              to={`/${isAdmin(userRoles) ? AdminPaths.admin : TeacherPaths.teacher}/${
+                TeacherPaths.timetableInfo
+              }/${teacherId}?week_day=${
+                WeekDaysMap[weekDay]
+              }&week_type=${weekType}&semester=${semester}`}
             >
               <Heading as="h3" size="lg">
                 {weekDay}
