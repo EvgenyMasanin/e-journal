@@ -61,7 +61,7 @@ export const TimetableCard = forwardRef<TimetableCardProps, 'div'>(
           <Stack textAlign="center" h="full">
             <LinkOverlay
               as={Link}
-              to={`/${TeacherPaths.teacher}/${TeacherPaths.timetableInfo}/${teacherId}?week_day=${WeekDaysMap[weekDay]}&week_type=${weekType}&semester=${semester}`}
+              to={`${TeacherPaths.teacher}/${TeacherPaths.timetableInfo}/${teacherId}?week_day=${WeekDaysMap[weekDay]}&week_type=${weekType}&semester=${semester}`}
             >
               <Heading as="h3" size="lg">
                 {weekDay}

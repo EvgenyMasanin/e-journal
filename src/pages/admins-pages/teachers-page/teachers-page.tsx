@@ -11,9 +11,7 @@ import {
 } from 'api/teachers.api'
 import { Teacher } from 'types'
 
-export interface TeachersPageProps {}
-
-export const TeachersPage: VFC<TeachersPageProps> = ({}) => {
+export const TeachersPage: VFC = () => {
   const { data, isLoading } = useGetTeachersQuery()
 
   const [updateTeacher, { isLoading: isUpdateLoading }] = useUpdateTeacherMutation()

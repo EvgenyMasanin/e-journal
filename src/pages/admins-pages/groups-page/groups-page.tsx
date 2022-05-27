@@ -5,11 +5,7 @@ import { AddGroupForm } from 'components/form/forms/add-group-form'
 import { useGroupSchemaResolver } from 'components/form/forms/schemes'
 import { SubmitHandler } from 'react-hook-form'
 import { useTableForm } from 'hooks/useTableForm'
-import {
-  useDeleteGroupMutation,
-  useGetGroupsQuery,
-  useUpdateGroupMutation,
-} from 'api/group.api'
+import { useDeleteGroupMutation, useGetGroupsQuery, useUpdateGroupMutation } from 'api/group.api'
 import { Group } from 'types'
 import { getRenderCell } from './render-cells'
 
@@ -24,9 +20,8 @@ export const GroupsPage: VFC = ({}) => {
   const columnNames = useRef(['Название группы', 'Количество подгрупп'])
 
   const handleSubmit: SubmitHandler<GroupFormFields> = useCallback(
-    (group) => {
-      console.log('🚀 ~ submit', group)
-      // updateGroup(group)
+    ({ id, name, subGroupsCount }) => {
+      updateGroup({ id, name, subGroupsCount: +subGroupsCount as 1 | 2 })
     },
     [updateGroup]
   )

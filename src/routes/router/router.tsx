@@ -15,15 +15,13 @@ import { MySubjectsPage } from 'pages/teachers-pages/my-subjects-page'
 import { MyTimetablePage } from 'pages/teachers-pages/my-timetable-page'
 import { TimetableInfoPage } from 'pages/teachers-pages/timetable-info-page'
 import { VFC } from 'react'
-import { Route, Routes, Outlet } from 'react-router-dom'
+import { Route, Routes, Outlet, Navigate } from 'react-router-dom'
 import { useTypedSelector } from 'redux-store/hooks'
 import { selectUserRoles, selectUser } from 'redux-store/reducers/user.slice'
 import { AdminPaths, Paths, TeacherPaths } from 'routes/paths'
 import { isAdmin } from 'types/user.types'
 
-export interface RouterProps {}
-
-export const Router: VFC<RouterProps> = ({}) => {
+export const Router: VFC = ({}) => {
   const userRoles = useTypedSelector(selectUserRoles)
   const user = useTypedSelector(selectUser)
 
@@ -31,7 +29,7 @@ export const Router: VFC<RouterProps> = ({}) => {
 
   return (
     <Routes>
-      <Route path={Paths.main} element={<Outlet />}>
+      <Route path={Paths.main}>
         {!user ? (
           <Route path="*" element={<Loader />} />
         ) : isAdmin(userRoles) ? (
@@ -68,7 +66,7 @@ export const Router: VFC<RouterProps> = ({}) => {
       {!data?.isAdminExist && !isLoading && (
         <Route path={Paths.signupAdmin} element={<AuthPage signup />} />
       )}
-      <Route path="*" element={<div>404 Эта страница не существует</div>} />
+      <Route path="*" element={<Navigate to={Paths.main} />} />
     </Routes>
   )
 }

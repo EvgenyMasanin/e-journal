@@ -42,6 +42,7 @@ export const authApi = createApi({
 export const {
   useLoginMutation,
   useAuthQuery,
+  useLazyAuthQuery,
   useIsAdminExistQuery,
   useSignupAdminMutation,
   useLazyIsAdminExistQuery,

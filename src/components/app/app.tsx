@@ -1,17 +1,13 @@
-import { Box, Flex, useColorModeValue } from '@chakra-ui/react'
-import Header from 'components/header/header'
-import { Layout } from 'components/layout'
+import { Flex, useColorModeValue } from '@chakra-ui/react'
 import { Router, Redirector } from 'routes'
 
-const App = () => {
-  return (
-    <>
-      <Redirector />
-      <Flex direction="column" h="full" bgColor={useColorModeValue('gray.50', 'gray.800')}>
-        <Router />
-      </Flex>
-    </>
-  )
-}
+const App = () => (
+  <>
+    <Redirector />
+    <Flex direction="column" h="full" bgColor={useColorModeValue('gray.50', 'gray.800')}>
+      <Router />
+    </Flex>
+  </>
+)
 
 export default App

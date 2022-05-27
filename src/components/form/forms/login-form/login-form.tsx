@@ -81,8 +81,8 @@ export const LoginForm: VFC<HTMLChakraProps<'form'>> = (props) => {
             />
             <PasswordField
               label="Пароль"
-              forgotPasswordLabel="Забыли пароль?"
-              onForgotPassword={handleForgotPassword}
+              // forgotPasswordLabel="Забыли пароль?"
+              // onForgotPassword={handleForgotPassword}
               {...register('password')}
               isInvalid={!!errors.password}
               errorMessage={errors.password?.message}

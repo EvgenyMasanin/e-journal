@@ -1,11 +1,11 @@
 export enum Paths {
-  main = '/',
+  main = '/e-journal',
   auth = '/auth',
   signupAdmin = '/auth/signup-admin',
 }
 
 export enum AdminPaths {
-  admin = 'admin',
+  admin = '/e-journal/admin',
   users = 'users',
   teachers = 'teachers',
   subjects = 'subjects',
@@ -17,7 +17,7 @@ export enum AdminPaths {
 }
 
 export enum TeacherPaths {
-  teacher = 'teacher',
+  teacher = '/e-journal/teacher',
   mySubjects = 'my-subjects',
   myTimetable = 'my-timetable',
   timetableInfo = 'timetable-info',

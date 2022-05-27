@@ -46,6 +46,7 @@ export const Redirector: VFC = () => {
 
   useEffect(() => {
     if (!data?.isAdminExist) return
+
     if (isAuthorized && pathname === Paths.main && user) {
       navigator(isAdmin(roles) ? AdminPaths.admin : TeacherPaths.teacher)
     }

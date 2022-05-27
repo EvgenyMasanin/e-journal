@@ -2,7 +2,10 @@ import { useCallback, useRef, VFC } from 'react'
 import { TablePageContainer } from 'components/table-page-container'
 import { Table } from 'components/table'
 import { AddUserForm } from 'components/form/forms/add-user-form'
-import { useAddUserFormSchemaResolver, useUserFormSchemaResolver } from 'components/form/forms/schemes'
+import {
+  useAddUserFormSchemaResolver,
+  useUserFormSchemaResolver,
+} from 'components/form/forms/schemes'
 import { useTableForm } from 'hooks/useTableForm'
 import { SubmitHandler } from 'react-hook-form'
 import { useGetUsersQuery, useUpdateUserMutation, useDeleteUserMutation } from 'api/users.api'
@@ -10,6 +13,9 @@ import { useGetRolesQuery } from 'api/role.api'
 import { useGetTeachersQuery } from 'api/teachers.api'
 import { mapUserFormFieldsToUser, mapUsers } from './mappers'
 import { getRenderCell, getRenderEditableCell } from './render-cells'
+import { useTypedSelector } from 'redux-store/hooks'
+import { selectUserId } from 'redux-store/reducers/user.slice'
+import { useLazyAuthQuery } from 'api/auth.api'
 
 export interface UserForTable {
   id: number
@@ -33,14 +39,23 @@ export const UsersPage: VFC = ({}) => {
   const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation()
   const [deleteUser, { isLoading: isDeleting }] = useDeleteUserMutation()
 
+  const [reauth] = useLazyAuthQuery()
+
+  const userId = useTypedSelector(selectUserId)
+
   const columnNames = useRef(['почта', 'преподаватель', 'роли'])
 
   const handleSubmit: SubmitHandler<UserFormFields> = useCallback(
-    (user) => {
+    async (user) => {
       console.log('🚀 ~ submit', user)
-      updateUser(user)
+      try {
+        await updateUser(user).unwrap()
+        if ((user.id = userId)) reauth()
+      } catch (error) {
+        console.log('🚀 ~ error', error)
+      }
     },
-    [updateUser]
+    [updateUser, reauth, userId]
   )
 
   const handleDelete = useCallback(
