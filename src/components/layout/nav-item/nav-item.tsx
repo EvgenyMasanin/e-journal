@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { Flex, FlexProps, Icon, useColorModeValue } from '@chakra-ui/react'
-import { Link, useMatch } from 'react-router-dom'
+import { Flex, FlexProps, Icon, useColorModeValue, Link } from '@chakra-ui/react'
+import { Link as RouterLink, useMatch } from 'react-router-dom'
 import { IconType } from 'react-icons'
 import { useHoverColor } from 'hooks/useHoverColor'
 import { AdminPaths, AllPaths, TeacherPaths } from 'routes'
@@ -26,7 +26,7 @@ export const NavItem: FC<NavItemProps> = ({ icon, path, text, children, ...rest 
   const match = useMatch(`${parentPath}/${path}`)
 
   return (
-    <Link to={path}>
+    <Link as={RouterLink} to={path} _focusVisible={{}} _hover={{}} _active={{}} _focus={{}}>
       <Flex
         align="center"
         p="4"

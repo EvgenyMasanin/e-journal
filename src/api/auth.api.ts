@@ -26,14 +26,14 @@ export const authApi = createApi({
     }),
     isAdminExist: build.query<{ isAdminExist: boolean }, void>({
       query: () => `${URL}/is-admin-exist`,
-      providesTags: () => [{ type: AuthApiTags.auth, id: 1 }], // FIXME:
+      providesTags: () => [{ type: AuthApiTags.auth, id: 1 }],
     }),
     signupAdmin: build.mutation<UserWithTokens, LoginFormFields>({
       query: (credentials) => ({
         url: `${URL}/signup-admin`,
         method: 'POST',
         body: credentials,
-        invalidatesTags: () => [{ type: AuthApiTags.auth, id: 1 }], // FIXME: doesn't trigger refetch isAdminExist
+        invalidatesTags: () => [{ type: AuthApiTags.auth, id: 1 }], 
       }),
     }),
   }),

@@ -30,7 +30,7 @@ export const Sidebar: VFC<SidebarProps> = ({ onClose, ...rest }) => {
         <LinkLogo />
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      <Flex direction="column" gap={2} px={4} mb={2}>
+      <Flex direction="column" gap={2} px={4} mb={2} onClick={onClose}>
         {links.map(({ icon, name, path }) => (
           <NavItem key={name} icon={icon} path={path} text={name} />
         ))}

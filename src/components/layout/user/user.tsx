@@ -1,4 +1,4 @@
-import { Box, HStack, Tag, VStack, Text, Flex } from '@chakra-ui/react'
+import { Box, HStack, Tag, VStack, Text, Flex, Avatar } from '@chakra-ui/react'
 import { VFC } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
 import { useTypedSelector } from 'redux-store/hooks'
@@ -11,8 +11,10 @@ export const User: VFC = ({}) => {
 
   return (
     <HStack>
-      <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
-        <Text fontSize="sm">{userName}</Text>
+      <VStack alignItems="flex-start" spacing={1} ml="2">
+        <Text fontSize="md" fontWeight="semibold">
+          {userName}
+        </Text>
         <Flex gap={2}>
           {user.roles?.map((r) => (
             <Tag

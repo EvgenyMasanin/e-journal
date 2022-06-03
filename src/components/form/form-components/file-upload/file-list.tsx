@@ -10,7 +10,7 @@ export interface FileListProps {
 
 export const FileList: VFC<FileListProps> = ({ files, onFileDelete }) => {
   return (
-    <List px={4} w="fit-content" maxH={150} overflowY="auto">
+    <List px={4} w="fit-content" maxH={100} overflowY="auto">
       {files.map((file) => (
         <ListItem
           key={file.name}

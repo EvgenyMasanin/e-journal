@@ -1,6 +1,6 @@
 export enum Paths {
   main = '/',
-  auth = '/auth',
+  auth = '/auth/signin',
   signupAdmin = '/auth/signup-admin',
 }
 

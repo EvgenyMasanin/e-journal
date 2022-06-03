@@ -1,12 +1,11 @@
 import { Box, Drawer, DrawerContent, useDisclosure } from '@chakra-ui/react'
-import { FC } from 'react'
+import { LessonPage } from 'pages/teachers-pages/lesson-page'
+import { VFC } from 'react'
 import { Outlet } from 'react-router-dom'
 import { MobileNav } from './mobile-nav'
 import { Sidebar } from './sidebar'
 
-export interface LayoutProps {}
-
-export const Layout: FC<LayoutProps> = ({}) => {
+export const Layout: VFC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Box minH="100vh">
@@ -26,6 +25,7 @@ export const Layout: FC<LayoutProps> = ({}) => {
       <MobileNav onOpen={onOpen} />
       <Box h="90%" ml={{ base: 0, md: 60 }} p="4" overflow="auto">
         <Outlet />
+        {/* <LessonPage /> */}
       </Box>
     </Box>
   )

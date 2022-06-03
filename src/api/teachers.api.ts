@@ -1,7 +1,8 @@
-import { refetchAction } from 'api/teacher-to-subject.api'
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { Teacher } from 'types'
+import { refetchAction } from 'api/teacher-to-subject.api'
 import { baseQueryWithReauth } from './api-config'
+
+import { Teacher } from 'types'
 
 export enum TeachersApiTags {
   teacher = 'Teacher',

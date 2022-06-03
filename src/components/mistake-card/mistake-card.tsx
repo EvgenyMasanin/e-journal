@@ -1,4 +1,4 @@
-import { Text, VStack } from '@chakra-ui/react'
+import { Divider, Text, VStack } from '@chakra-ui/react'
 import { Card } from 'components/card'
 import { FC } from 'react'
 
@@ -8,8 +8,9 @@ export interface MistakeCardProps {
 
 export const MistakeCard: FC<MistakeCardProps> = ({ title, children }) => {
   return (
-    <Card>
+    <Card w="full" h="full" cursor="pointer">
       <Text>{title}</Text>
+      <Divider />
       <VStack alignItems="flex-start" spacing={2}>
         {children}
       </VStack>

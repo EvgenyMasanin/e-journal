@@ -1,27 +1,27 @@
-import { useIsAdminExistQuery } from 'api/auth.api'
+import { VFC } from 'react'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import { Layout } from 'components/layout'
 import { Loader } from 'components/loader'
-import { AdminPage } from 'pages/admins-pages/admin-page'
-import { GroupsPage } from 'pages/admins-pages/groups-page'
+import { AuthPage } from 'pages/auth-page'
+import { GreetingPage } from 'pages/greeting-page'
+import { UsersPage } from 'pages/admins-pages/users-page'
 import { RolesPage } from 'pages/admins-pages/roles-page'
+import { GroupsPage } from 'pages/admins-pages/groups-page'
 import { SubjectsPage } from 'pages/admins-pages/subjects-page'
 import { TeachersPage } from 'pages/admins-pages/teachers-page'
-import { TimetablesMistakesPage } from 'pages/admins-pages/timetables-mistakes-page'
 import { TimetablesPage } from 'pages/admins-pages/timetables-page'
-import { UploadFilesPage } from 'pages/admins-pages/upload-files-page'
-import { UsersPage } from 'pages/admins-pages/users-page'
-import { AuthPage } from 'pages/auth-page'
 import { MySubjectsPage } from 'pages/teachers-pages/my-subjects-page'
 import { MyTimetablePage } from 'pages/teachers-pages/my-timetable-page'
+import { UploadFilesPage } from 'pages/admins-pages/upload-files-page'
 import { TimetableInfoPage } from 'pages/teachers-pages/timetable-info-page'
-import { VFC } from 'react'
-import { Route, Routes, Outlet, Navigate } from 'react-router-dom'
+import { TimetablesMistakesPage } from 'pages/admins-pages/timetables-mistakes-page'
 import { useTypedSelector } from 'redux-store/hooks'
 import { selectUserRoles, selectUser } from 'redux-store/reducers/user.slice'
 import { AdminPaths, Paths, TeacherPaths } from 'routes/paths'
+import { useIsAdminExistQuery } from 'api/auth.api'
 import { isAdmin } from 'types/user.types'
 
-export const Router: VFC = ({}) => {
+export const Router: VFC = () => {
   const userRoles = useTypedSelector(selectUserRoles)
   const user = useTypedSelector(selectUser)
 
@@ -34,7 +34,7 @@ export const Router: VFC = ({}) => {
           <Route path="*" element={<Loader />} />
         ) : isAdmin(userRoles) ? (
           <Route path={AdminPaths.admin} element={<Layout />}>
-            <Route index element={<AdminPage />} />
+            <Route index element={<GreetingPage userType="admin" />} />
             <Route path={AdminPaths.users} element={<UsersPage />} />
             <Route path={AdminPaths.roles} element={<RolesPage />} />
             <Route path={AdminPaths.teachers} element={<TeachersPage />} />
@@ -52,6 +52,7 @@ export const Router: VFC = ({}) => {
           </Route>
         ) : (
           <Route path={TeacherPaths.teacher} element={<Layout />}>
+            <Route index element={<GreetingPage userType="teacher" />} />
             <Route path={TeacherPaths.myTimetable} element={<MyTimetablePage />} />
             <Route
               path={`${TeacherPaths.timetableInfo}/:teacher_id`}

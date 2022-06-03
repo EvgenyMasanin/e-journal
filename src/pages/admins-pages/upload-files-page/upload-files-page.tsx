@@ -3,7 +3,7 @@ import { Box, Button, chakra, Flex, Heading, Stack } from '@chakra-ui/react'
 import { SubmitHandler } from 'react-hook-form'
 import { FileUpload } from 'components/form'
 import { FileUploadFormFields, useFileUploadForm } from 'hooks/useFileUploadForm'
-import { useSendFilesMutation } from 'api/files.api'
+import { downloadDesignGuidFile, useSendFilesMutation } from 'api/files.api'
 
 export const UploadFilesPage: VFC = () => {
   const {
@@ -47,6 +47,17 @@ export const UploadFilesPage: VFC = () => {
     <Box maxW={800} mx="auto">
       <Heading fontSize="3xl" mb={10} textAlign="center">
         Загрузка файлов для формирования расписания
+      </Heading>
+      <Heading fontSize="2xl" mb={10} textAlign="center">
+        Перед загрузкой пожалуйста ознакомьтесь с{' '}
+        <Button
+          variant="link"
+          colorScheme="teal"
+          fontSize="2xl"
+          onClick={() => downloadDesignGuidFile()}
+        >
+          правилами оформления файлов
+        </Button>
       </Heading>
       <chakra.form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={6}>

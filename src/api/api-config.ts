@@ -10,7 +10,7 @@ import {
 import { RootState } from 'redux-store/store'
 import { Tokens } from 'types/user.types'
 
-export const BASE_URL = 'http://localhost:7000/'
+export const BASE_URL = process.env.REACT_APP_API_BASE_URL
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,

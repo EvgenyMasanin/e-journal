@@ -32,8 +32,8 @@ export const AddRoleForm: VFC = () => {
 
   return (
     <ModalForm
-      openBtnTitle="Добавить пользователя"
-      headerTitle="Введите данные пользователя"
+      openBtnTitle="Добавить роль"
+      headerTitle="Введите данные роли"
       fields={fields}
       register={register}
       errors={errors}

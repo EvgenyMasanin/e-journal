@@ -32,3 +32,15 @@ export const downloadFileWithTimetable = async () => {
     console.log('🚀 ~ downloadFileWithTimetable ~ error', error)
   }
 }
+
+export const downloadDesignGuidFile = async () => {
+  try {
+    const resp = await fetch(`${BASE_URL}excel/design-guide`)
+    const fileName = resp.headers.get('content-disposition')
+    resp.blob().then(async (blob) => {
+      saveAs(blob, fileName)
+    })
+  } catch (error) {
+    console.log('🚀 ~ downloadDesignGuidFile ~ error', error)
+  }
+}

@@ -60,18 +60,21 @@ export const MobileNav: VFC<MobileNavProps> = ({ onOpen, ...rest }) => {
         <LinkLogo />
       </Box>
 
-      <DownloadFileWithTimetableButton />
-
       <HStack spacing={{ base: '0', md: '6' }} justifyContent="space-between">
         <Flex alignItems={'center'} gap={2}>
-          <ColorModeSwitcher />
-          <LangModeSwitcher />
+          <DownloadFileWithTimetableButton />
+          <Box display={{ base: 'none', md: 'flex' }}>
+            <ColorModeSwitcher />
+          </Box>
+          {/* <LangModeSwitcher /> */}
           <Menu>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
               <User />
             </MenuButton>
             <MenuList borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Профиль</MenuItem>
+              <Box display={{ base: 'flex', md: 'none' }}>
+                <ColorModeSwitcher />
+              </Box>
               <MenuDivider />
               <MenuItem fontSize={18} color={color} gap={2} onClick={handleClick}>
                 <FaSignOutAlt />
